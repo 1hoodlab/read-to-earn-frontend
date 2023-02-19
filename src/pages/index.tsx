@@ -4,6 +4,7 @@ import { Inter } from "@next/font/google";
 import styles from "@/styles/Home.module.scss";
 import { Box, Button, Text } from "@chakra-ui/react";
 import ButtonRte from "@/components/button";
+import { getNowddddMMMMDYYYY } from "@/utils";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -34,7 +35,7 @@ export default function Home() {
             </Box>
             <Box padding={"3px"}>
               <Text fontWeight={800} fontSize={"10px"} lineHeight={"12px"}>
-                Thursday, June 03, 2023
+                {getNowddddMMMMDYYYY()}
               </Text>
               <Text fontSize={"10px"} fontWeight={"medium"} color={"black.300"}>
                 Today’s paper
