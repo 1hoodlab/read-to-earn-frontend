@@ -1,7 +1,37 @@
-.main {
-}
+.main {}
+
 .home_top__container {
   border-top: 1px solid #ededed;
   border-bottom: 1px solid #ededed;
   padding: 17px 0px 17px 0px;
+}
+
+//Menu
+.menu {
+  padding: 13px 0;
+  border-bottom: 1px solid #ededed;
+
+  .menu_list {
+    list-style: none;
+    justify-content: space-around;
+    text-align: center;
+
+
+
+    li {
+      display: inline-block;
+      font-family: Inter;
+      font-size: 12px;
+      font-weight: 600;
+      line-height: 15px;
+      letter-spacing: 0em;
+      margin: 0 13px;
+      color: #5A5A5A;
+
+      &:hover {
+        color: #000000;
+        cursor: pointer;
+      }
+    }
+  }
 }
