@@ -29,6 +29,25 @@
   text-align: center;
 }
 
+@mixin author {
+  // font-family: Inter;
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 15px;
+  letter-spacing: 0em;
+  text-align: left;
+}
+
+@mixin team {
+  // font-family: Inter;
+  font-size: 8px;
+  font-weight: 600;
+  line-height: 10px;
+  letter-spacing: 0em;
+  text-align: left;
+  color: #a3a3a3;
+}
+
 
 //Menu
 .menu {
@@ -86,6 +105,7 @@
     #fstA_item_title {
       @include title();
 
+
     }
 
     #fstA_item_earn {
@@ -121,5 +141,97 @@
 
       }
     }
+  }
+}
+
+// second Article
+.secA_head {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 116px;
+  margin-bottom: 35px;
+
+  .secA_head_item {
+    display: inline-block;
+  }
+
+  #Fullstory {
+    // font-family: Inter;
+    font-size: 20px;
+    font-weight: 700;
+    line-height: 16px;
+    letter-spacing: 0.02em;
+    // text-align: left;
+  }
+
+  #SeeNow {
+    // font-family: Inter;
+    font-size: 12px;
+    font-weight: 500;
+    line-height: 16px;
+    letter-spacing: 0.02em;
+    // text-align: right; 
+
+  }
+}
+
+.secA {
+
+  div {
+    max-width: 50%;
+    padding-right: 30px;
+  }
+
+  img {
+    height: 301px;
+    width: 620px;
+    border-radius: 0px;
+    max-width: 50%;
+  }
+
+  .secA_list {
+    display: inline-block;
+
+    .secA_list_item {
+      margin: 5px 0;
+    }
+
+    #author {
+      @include author();
+    }
+
+    #team {
+      @include team();
+    }
+
+    #secA_item_title {
+      @include title();
+    }
+
+    #btnFree {
+      @include btnEarn();
+      background-color: #00ff75;
+    }
+
+    #secA_item_content {
+      font-size: 13px;
+      font-weight: 500;
+      line-height: 19px;
+      letter-spacing: 0.02em;
+      text-align: left;
+      color: #909090;
+      margin-top: 10px;
+
+      strong {
+        color: #000000;
+        font-size: 13px;
+        font-weight: 700;
+        line-height: 19px;
+        letter-spacing: 0.02em;
+        text-align: left;
+
+      }
+    }
+
   }
 }
