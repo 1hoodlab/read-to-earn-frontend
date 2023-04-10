@@ -6,6 +6,30 @@
   padding: 17px 0px 17px 0px;
 }
 
+@mixin title {
+  // font-family: Montserrat;
+  font-size: 34px;
+  font-weight: 900;
+  line-height: 41px;
+  letter-spacing: 0em;
+  text-align: left;
+}
+
+@mixin btnEarn {
+  height: 17px;
+  width: 59px;
+  border-radius: 1px;
+  font-family: Montserrat;
+  font-size: 8px;
+  font-weight: 700;
+  line-height: 7px;
+  letter-spacing: 0.02em;
+  text-align: left;
+  background-color: #fff500;
+  text-align: center;
+}
+
+
 //Menu
 .menu {
   padding: 13px 0;
@@ -31,6 +55,70 @@
       &:hover {
         color: #000000;
         cursor: pointer;
+      }
+    }
+  }
+}
+
+// first Article
+
+.fstA {
+  margin-top: 92px;
+
+  img {
+    height: 275px;
+    width: 523.0850830078125px;
+    border-radius: 0px;
+    max-width: 50%;
+    margin-right: 20px;
+  }
+
+  div {
+    max-width: 50%;
+
+  }
+
+  .fstA_list {
+    display: inline-block;
+
+    .fstA_item {}
+
+    #fstA_item_title {
+      @include title();
+
+    }
+
+    #fstA_item_earn {
+      @include btnEarn();
+      margin: 10px 0 5px 0;
+    }
+
+    #fstA_item_main_content {
+      // font-family: Inter;
+      font-size: 13px;
+      font-weight: 700;
+      line-height: 19px;
+      letter-spacing: 0.02em;
+      margin-top: 12px;
+    }
+
+    #fstA_item_content {
+      font-size: 13px;
+      font-weight: 500;
+      line-height: 19px;
+      letter-spacing: 0.02em;
+      text-align: left;
+      color: #909090;
+      margin-top: 10px;
+
+      strong {
+        color: #000000;
+        font-size: 13px;
+        font-weight: 700;
+        line-height: 19px;
+        letter-spacing: 0.02em;
+        text-align: left;
+
       }
     }
   }
