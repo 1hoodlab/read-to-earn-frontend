@@ -1,0 +1,84 @@
+@mixin author {
+    // font-family: Inter;
+    font-size: 12px;
+    font-weight: 700;
+    line-height: 15px;
+    letter-spacing: 0em;
+    text-align: left;
+}
+
+@mixin team {
+    // font-family: Inter;
+    font-size: 8px;
+    font-weight: 600;
+    line-height: 10px;
+    letter-spacing: 0em;
+    text-align: left;
+    color: #a3a3a3;
+}
+
+@mixin btnEarn {
+    height: 17px;
+    width: 59px;
+    border-radius: 1px;
+    font-family: Montserrat;
+    font-size: 8px;
+    font-weight: 700;
+    line-height: 7px;
+    letter-spacing: 0.02em;
+    text-align: left;
+    background-color: #fff500;
+    text-align: center;
+}
+
+
+.listArticle {
+    margin-bottom: 66px;
+
+
+    .listArticle_list {
+        display: inline-block;
+        max-width: calc(100%/3);
+
+        p {
+            padding-right: 28px;
+        }
+
+        .listArticle_item {}
+
+        #listArticle_item_img {
+            height: 159px;
+            width: auto;
+
+        }
+
+        #listArticle_item_img:first-child {
+            width: 353px;
+        }
+
+        #author {
+            @include author();
+            margin-top: 10px;
+        }
+
+        #team {
+            @include team();
+            margin-top: 5px;
+        }
+
+        #listArticle_item_content {
+            // font-family: Montserrat;
+            font-size: 12px;
+            font-weight: 700;
+            line-height: 16px;
+            letter-spacing: 0.02em;
+            text-align: left;
+            margin-top: 9px;
+
+        }
+
+        #listArticle_item_earn {
+            @include btnEarn();
+        }
+    }
+}
