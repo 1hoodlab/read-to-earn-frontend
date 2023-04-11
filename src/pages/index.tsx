@@ -1,7 +1,7 @@
 import styles from "@/styles/Home.module.scss";
 import Header from "@/components/header";
 import Menu from "@/components/menu";
-import FstArticle from "@/components/fstArticle";
+import FirstArticle from "@/components/firstArticle";
 import ListArticle from "@/components/listArticle";
 import { NextSeo } from "next-seo";
 
@@ -10,7 +10,7 @@ export default function Home() {
     <main className={styles.main}>
       <Header />
       <Menu />
-      <FstArticle />
+      <FirstArticle />
       <ListArticle />
       <ListArticle />
     </main>
