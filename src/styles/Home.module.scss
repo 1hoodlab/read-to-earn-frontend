@@ -83,7 +83,7 @@
 
 // first Article
 
-.fstA {
+.firstArticle {
   margin-top: 92px;
 
   img {
@@ -99,23 +99,23 @@
 
   }
 
-  .fstA_list {
+  .firstArticle_list {
     display: inline-block;
 
-    .fstA_item {}
+    .firstArticle_item {}
 
-    #fstA_item_title {
+    #firstArticle_item_title {
       @include title();
 
 
     }
 
-    #fstA_item_earn {
+    #firstArticle_item_earn {
       @include btnEarn();
       margin: 10px 0 5px 0;
     }
 
-    #fstA_item_main_content {
+    #firstArticle_item_main_content {
       // font-family: Inter;
       font-size: 13px;
       font-weight: 700;
@@ -124,7 +124,7 @@
       margin-top: 12px;
     }
 
-    #fstA_item_content {
+    #firstArticle_item_content {
       font-size: 13px;
       font-weight: 500;
       line-height: 19px;
@@ -147,13 +147,13 @@
 }
 
 // second Article
-.secA_head {
+.secondArticle_head {
   display: flex;
   justify-content: space-between;
   margin-top: 116px;
   margin-bottom: 35px;
 
-  .secA_head_item {
+  .secondArticle_head_item {
     display: inline-block;
   }
 
@@ -177,7 +177,7 @@
   }
 }
 
-.secA {
+.secondArticle {
   margin-bottom: 110px;
 
   div {
@@ -192,10 +192,10 @@
     max-width: 50%;
   }
 
-  .secA_list {
+  .secondArticle_list {
     display: inline-block;
 
-    .secA_list_item {
+    .secondArticle_list_item {
       margin: 5px 0;
     }
 
@@ -207,7 +207,7 @@
       @include team();
     }
 
-    #secA_item_title {
+    #secondArticle_item_title {
       @include title();
     }
 
@@ -216,7 +216,7 @@
       background-color: #00ff75;
     }
 
-    #secA_item_content {
+    #secondArticle_item_content {
       font-size: 13px;
       font-weight: 500;
       line-height: 19px;

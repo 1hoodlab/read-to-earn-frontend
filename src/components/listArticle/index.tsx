@@ -7,7 +7,7 @@ export default function index() {
             <div className={styles.listArticle_list}>
                 <img src="/img/listArticle_img1.png" alt=""
                     className={styles.listArticle_item}
-                    id={styles.listArticle_item_img1}
+                    id={styles.listArticle_item_img}
                 />
                 <p className={styles.listArticle_item} id={styles.author}>By James Landale</p>
                 <p className={styles.listArticle_item} id={styles.team}>TeamliserVCorp</p>
