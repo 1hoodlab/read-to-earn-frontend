@@ -1,7 +1,7 @@
 import React from 'react'
 import styles from "@/styles/Home.module.scss";
 
-export default function index() {
+export default function ListArticle() {
     return (
         <div className={styles.listArticle}>
             <div className={styles.listArticle_list}>
