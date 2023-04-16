@@ -1,7 +1,24 @@
-.main {
-}
+.main {}
+
 .home_top__container {
   border-top: 1px solid #ededed;
   border-bottom: 1px solid #ededed;
   padding: 17px 0px 17px 0px;
+}
+
+.home_user {
+
+
+  .home_user_info {
+    padding-top: 9px;
+
+    .home_user_item {
+      text-align: right;
+      margin-right: 11px;
+    }
+  }
+}
+
+.infomation {
+  border-top: 1px solid #ededed;
 }
