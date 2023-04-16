@@ -39,22 +39,23 @@
     .listArticle_list {
         display: inline-block;
         max-width: calc(100%/3);
+        height: 100%;
 
-        p {
-            padding-right: 28px;
-        }
+        // p {
+        //     padding-right: 28px;
+        // }
 
-        .listArticle_item {}
+        // .listArticle_item {}
 
-        #listArticle_item_img {
-            height: 159px;
-            width: auto;
+        // #listArticle_item_img {
+        //     // height: 159px;   
+        //     // width: auto;
 
-        }
+        // // }
 
-        #listArticle_item_img:first-child {
-            width: 353px;
-        }
+        // #listArticle_item_img:first-child {
+        //     width: 353px;
+        // }
 
         #author {
             @include author();
@@ -74,7 +75,6 @@
             letter-spacing: 0.02em;
             text-align: left;
             margin-top: 9px;
-
         }
 
         #listArticle_item_earn {
