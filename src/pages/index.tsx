@@ -5,9 +5,19 @@ import FirstArticle from "@/components/FirstArticle";
 import ListArticle from "@/components/ListArticle";
 import { NextSeo } from "next-seo";
 import { api_url } from "@/constant/network";
-
+import Axios from 'axios'
+import { useEffect } from "react";
 export default function Home() {
-  console.log(process.env.BASE_URL);
+  const getData = async() => {
+    let data = await  Axios({
+      url: '/api/hello',
+      method: 'GET'
+    })
+    console.log(data);
+  }
+  useEffect(() => {
+    getData();
+  },[])
   return (
     <main className={styles.main}>
       <Header />
