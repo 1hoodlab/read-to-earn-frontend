@@ -1,22 +1,23 @@
 import React from 'react'
 import styles from "@/styles/Home.module.scss";
+import { Box, Text } from '@chakra-ui/react'
 
 export default function Menu() {
     return (
-        <div className={styles.menu}>
-            <ul className={styles.menu_list}>
-                <li>Home</li>
-                <li>War in Ukraina</li>
-                <li>Coronavirus</li>
-                <li>World</li>
-                <li>Asia</li>
-                <li>UK</li>
-                <li>Tech</li>
-                <li>Stories</li>
-                <li>Enterintment & Arts</li>
-                <li>Health</li>
-                <li>Business</li>
-            </ul>
-        </div>
+        <Box className={styles.menu}>
+            <Box className={styles.menu_list}>
+                <Text className={styles.text}>Home</Text>
+                <Text className={styles.text}>War in Ukraina</Text>
+                <Text className={styles.text}>Coronavirus</Text>
+                <Text className={styles.text}>World</Text>
+                <Text className={styles.text}>Asia</Text>
+                <Text className={styles.text}>UK</Text>
+                <Text className={styles.text}>Tech</Text>
+                <Text className={styles.text}>Stories</Text>
+                <Text className={styles.text}>Enterintment & Arts</Text>
+                <Text className={styles.text}>Health</Text>
+                <Text className={styles.text}>Business</Text>
+            </Box>
+        </Box>
     )
 }
