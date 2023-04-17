@@ -1,25 +1,33 @@
 import React from 'react'
 import styles from "@/styles/Home.module.scss";
-import { Box, Text, Button } from '@chakra-ui/react'
+import { Box, Text, Button, Flex } from '@chakra-ui/react'
 import Image from "next/image";
 
 export default function FirstArticle() {
     return (
         <>
             {/* // first Article */}
-            <Box className={styles.firstArticle}>
+            {/* <Box background={"#D9D9D9"} height={151} width={151} transform={"90deg"} ></Box> */}
+            <Image
+                src={"/img/trongsuot1.png"}
+                height={151}
+                width={151}
+                alt='trongsuot'
+                id={styles.trongsuot}
+            />
+            <Box className={styles.firstArticle} display={"flex"}>
                 <Image src="/img/article1.png"
                     alt=""
                     className={styles.firstArticle_list}
                     height={275}
                     width={523.0850830078125}
                     id={styles.img} />
-                <Box className={styles.firstArticle_list} id={styles.firstArticle_list_title}>
+                <Box className={styles.firstArticle_list} id={styles.firstArticle_list_title} marginTop={0}>
                     <Text className={styles.firstArticle_item} id={styles.firstArticle_item_title} fontSize={32}>
                         Web wallet Xverse added support for NFTs on the Bitcoin network
                     </Text>
                     <Box background={"#F0E821"} height={18} width={158} marginTop={-5} marginLeft={-1.5}></Box>
-                    <Button className={styles.firstArticle_item} id={styles.firstArticle_item_earn}>
+                    <Button className={styles.firstArticle_item} id={styles.firstArticle_item_earn} >
                         #EARN
                     </Button>
                     <Text className={styles.firstArticle_item} id={styles.firstArticle_item_main_content}>
@@ -46,7 +54,7 @@ export default function FirstArticle() {
 
                 <Text className={styles.secondArticle_head_item} id={styles.SeeNow}>See now</Text>
             </Box >
-            <Box className={styles.secondArticle}>
+            <Box className={styles.secondArticle} display={"flex"}>
 
                 <Box className={styles.secondArticle_list}>
                     <Text className={styles.secondArticle_list_item} id={styles.author}>By James Landale</Text>

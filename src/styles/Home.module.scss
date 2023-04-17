@@ -1,6 +1,6 @@
-@import 'listArticle';
+@import 'listArticle.module';
 
-.main {}
+// .main {}
 
 .home_top__container {
   border-top: 1px solid #ededed;
@@ -83,10 +83,20 @@
   }
 }
 
+
 // first Article
+
+#trongsuot {
+  transform: rotate(45deg);
+  position: absolute;
+  margin-top: 17px;
+  margin-left: 480px;
+  z-index: 2;
+}
 
 .firstArticle {
   margin-top: 92px;
+
 
   #img {
     height: 275px;
@@ -94,16 +104,19 @@
     border-radius: 0px;
     max-width: 50%;
     margin-right: 20px;
+    z-index: 1;
+    background-color: #ffffff;
   }
+
 
   #firstArticle_list_title {
     max-width: 50%;
   }
 
   .firstArticle_list {
-    display: inline-block;
+    z-index: 3;
 
-    .firstArticle_item {}
+    // .firstArticle_item {}
 
     #firstArticle_item_title {
       @include title();
@@ -112,7 +125,7 @@
 
     #firstArticle_item_earn {
       @include btnEarn();
-      margin: 10px 0 5px 0;
+      margin: 15px 0 5px 0;
     }
 
     #firstArticle_item_main_content {
@@ -121,7 +134,7 @@
       font-weight: 700;
       line-height: 19px;
       letter-spacing: 0.02em;
-      margin-top: 12px;
+      margin-top: 15px;
     }
 
     #firstArticle_item_content {
@@ -131,7 +144,7 @@
       letter-spacing: 0.02em;
       text-align: left;
       color: #909090;
-      margin-top: 10px;
+      margin-top: 12px;
 
       strong {
         color: #000000;
