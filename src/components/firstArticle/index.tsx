@@ -14,10 +14,11 @@ export default function FirstArticle() {
                     height={275}
                     width={523.0850830078125}
                     id={styles.img} />
-                <Box className={styles.firstArticle_list}>
-                    <Text className={styles.firstArticle_item} id={styles.firstArticle_item_title}>
+                <Box className={styles.firstArticle_list} id={styles.firstArticle_list_title}>
+                    <Text className={styles.firstArticle_item} id={styles.firstArticle_item_title} fontSize={32}>
                         Web wallet Xverse added support for NFTs on the Bitcoin network
                     </Text>
+                    <Box background={"#F0E821"} height={18} width={158} marginTop={-5} marginLeft={-1.5}></Box>
                     <Button className={styles.firstArticle_item} id={styles.firstArticle_item_earn}>
                         #EARN
                     </Button>
@@ -36,9 +37,15 @@ export default function FirstArticle() {
 
             {/* second Article */}
             <Box className={styles.secondArticle_head}>
-                <Text className={styles.secondArticle_head_item} id={styles.Fullstory}>Full Story</Text>
+                <Box>
+                    <Text className={styles.secondArticle_head_item} id={styles.Fullstory}>Full Story</Text>
+
+                    <Box background={"#F0E821"} height={13} width={110.5} marginTop={-3.5} marginLeft={-1.5}></Box>
+                </Box>
+                <Box height={0.5} background={"#EDEDED"} width={930} marginTop={3}></Box>
+
                 <Text className={styles.secondArticle_head_item} id={styles.SeeNow}>See now</Text>
-            </Box>
+            </Box >
             <Box className={styles.secondArticle}>
 
                 <Box className={styles.secondArticle_list}>

@@ -96,9 +96,8 @@
     margin-right: 20px;
   }
 
-  div {
+  #firstArticle_list_title {
     max-width: 50%;
-
   }
 
   .firstArticle_list {
@@ -108,8 +107,7 @@
 
     #firstArticle_item_title {
       @include title();
-
-
+      font-size: 32px
     }
 
     #firstArticle_item_earn {
