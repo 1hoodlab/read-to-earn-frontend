@@ -2,10 +2,13 @@ import React from 'react'
 import styles from "@/styles/Home.module.scss";
 import { Box, Text, Button, Flex } from '@chakra-ui/react'
 import Image from "next/image";
+import ButtonEarn from "@/components/ButtonEarn";
+import ButtonFree from "@/components/ButtonFree";
 
 export default function FirstArticle() {
     return (
         <>
+
             {/* // first Article */}
             {/* <Box background={"#D9D9D9"} height={151} width={151} transform={"90deg"} ></Box> */}
             <Image
@@ -23,13 +26,13 @@ export default function FirstArticle() {
                     width={523.0850830078125}
                     id={styles.img} />
                 <Box className={styles.firstArticle_list} id={styles.firstArticle_list_title} marginTop={0}>
-                    <Text className={styles.firstArticle_item} id={styles.firstArticle_item_title} fontSize={32}>
+                    <Text className={styles.firstArticle_item} id={styles.firstArticle_item_title} fontSize={32} >
                         Web wallet Xverse added support for NFTs on the Bitcoin network
                     </Text>
                     <Box background={"#F0E821"} height={18} width={158} marginTop={-5} marginLeft={-1.5}></Box>
-                    <Button className={styles.firstArticle_item} id={styles.firstArticle_item_earn} >
-                        #EARN
-                    </Button>
+                    <Box id={styles.firstArticle_item_earn}>
+                        <ButtonEarn></ButtonEarn>
+                    </Box>
                     <Text className={styles.firstArticle_item} id={styles.firstArticle_item_main_content}>
                         If you use the Ordinals protocol,
                         which allows you to inscribe NFT data onto the Bitcoin
@@ -61,7 +64,7 @@ export default function FirstArticle() {
                     <Text className={styles.secondArticle_list_item} id={styles.team}>TeamliserVCorp</Text>
                     <Text className={styles.secondArticle_list_item} id={styles.secondArticle_item_title}>
                         Ukraine war: Five ways Russia’s invasion may play out</Text>
-                    <Button className={styles.secondArticle_list_item} id={styles.btnFree}>#FREE</Button>
+                    <ButtonFree></ButtonFree>
                     <Text className={styles.secondArticle_list_item} id={styles.secondArticle_item_content}>
                         Lorem Ipsum is simply dummy text of the printing and typesetting industry.
                         Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,
