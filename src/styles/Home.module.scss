@@ -36,7 +36,7 @@
   color: #a3a3a3;
 }
 
-#btnEarn {
+#tagEarn {
   height: 17px;
   width: 59px;
   border-radius: 1px;
@@ -45,12 +45,11 @@
   font-weight: 700;
   line-height: 7px;
   letter-spacing: 0.02em;
-  text-align: left;
   background-color: #fff500;
   text-align: center;
 }
 
-#btnFree {
+#tagFree {
   height: 17px;
   width: 59px;
   border-radius: 1px;
@@ -59,7 +58,6 @@
   font-weight: 700;
   line-height: 7px;
   letter-spacing: 0.02em;
-  text-align: left;
   background-color: #00ff75;
   text-align: center;
 }
@@ -99,7 +97,7 @@
 
 // first Article
 
-#trongsuot {
+#white {
   transform: rotate(45deg);
   position: absolute;
   margin-top: 17px;
@@ -219,6 +217,8 @@
 
   .secondArticle_list {
     display: inline-block;
+
+
 
     .secondArticle_list_item {
       margin: 5px 0;

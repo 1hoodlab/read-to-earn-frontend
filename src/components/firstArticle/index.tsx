@@ -2,8 +2,8 @@ import React from 'react'
 import styles from "@/styles/Home.module.scss";
 import { Box, Text, Button, Flex } from '@chakra-ui/react'
 import Image from "next/image";
-import ButtonEarn from "@/components/ButtonEarn";
-import ButtonFree from "@/components/ButtonFree";
+import TagEarn from "@/components/TagEarn";
+import TagFree from "@/components/TagFree";
 
 export default function FirstArticle() {
     return (
@@ -12,11 +12,11 @@ export default function FirstArticle() {
             {/* // first Article */}
             {/* <Box background={"#D9D9D9"} height={151} width={151} transform={"90deg"} ></Box> */}
             <Image
-                src={"/img/trongsuot1.png"}
+                src={"/img/white.png"}
                 height={151}
                 width={151}
-                alt='trongsuot'
-                id={styles.trongsuot}
+                alt=''
+                id={styles.white}
             />
             <Box className={styles.firstArticle} display={"flex"}>
                 <Image src="/img/article1.png"
@@ -31,7 +31,7 @@ export default function FirstArticle() {
                     </Text>
                     <Box background={"#F0E821"} height={18} width={158} marginTop={-5} marginLeft={-1.5}></Box>
                     <Box id={styles.firstArticle_item_earn}>
-                        <ButtonEarn></ButtonEarn>
+                        <TagEarn />
                     </Box>
                     <Text className={styles.firstArticle_item} id={styles.firstArticle_item_main_content}>
                         If you use the Ordinals protocol,
@@ -64,7 +64,7 @@ export default function FirstArticle() {
                     <Text className={styles.secondArticle_list_item} id={styles.team}>TeamliserVCorp</Text>
                     <Text className={styles.secondArticle_list_item} id={styles.secondArticle_item_title}>
                         Ukraine war: Five ways Russia’s invasion may play out</Text>
-                    <ButtonFree></ButtonFree>
+                    <TagFree />
                     <Text className={styles.secondArticle_list_item} id={styles.secondArticle_item_content}>
                         Lorem Ipsum is simply dummy text of the printing and typesetting industry.
                         Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,

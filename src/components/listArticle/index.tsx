@@ -2,7 +2,7 @@ import React from 'react'
 import styles from "@/styles/Home.module.scss";
 import { Box, Text, Button, space } from '@chakra-ui/react'
 import Image from "next/image";
-import ButtonEarn from "@/components/ButtonEarn";
+import TagEarn from "@/components/TagEarn";
 
 export default function ListArticle() {
     return (
@@ -19,7 +19,7 @@ export default function ListArticle() {
                     Nghiên cứu cho thấy game thủ có kỹ năng đưa ra quyết
                     định tốt hơn với hoạt động não bộ tăng cường
                 </Text>
-                <ButtonEarn></ButtonEarn>
+                <TagEarn />
             </Box>
             <Box className={styles.listArticle_list} marginBottom={16} marginRight={5}>
                 <Image src="/img/listArticle_img2.png" alt=""
@@ -33,7 +33,7 @@ export default function ListArticle() {
                     Dynamic avatars for legacy capture:
                     a revolution of blockchain use in the making
                 </Text>
-                <ButtonEarn></ButtonEarn>
+                <TagEarn />
             </Box>
             <Box className={styles.listArticle_list}>
                 <Image src="/img/listArticle_img3.png" alt=""
@@ -48,7 +48,7 @@ export default function ListArticle() {
                     Blockchain.com Shopping Assets to Fill
                     $270M Hole From Three Arrows Capital: Sources
                 </Text>
-                <ButtonEarn></ButtonEarn>
+                <TagEarn />
             </Box>
         </Box>
     )
