@@ -31,7 +31,7 @@ export default function FirstArticle() {
                     </Text>
                     <Box background={"#F0E821"} height={18} width={158} marginTop={-5} marginLeft={-1.5}></Box>
                     <Box id={styles.firstArticle_item_earn}>
-                        <RTETag isEarn={true} />
+                        <RTETag isEarn={true} isYellow={true} />
                     </Box>
                     <Text className={styles.firstArticle_item} id={styles.firstArticle_item_main_content}>
                         If you use the Ordinals protocol,
@@ -64,7 +64,7 @@ export default function FirstArticle() {
                     <Text className={styles.secondArticle_list_item} id={styles.team}>TeamliserVCorp</Text>
                     <Text className={styles.secondArticle_list_item} id={styles.secondArticle_item_title}>
                         Ukraine war: Five ways Russia’s invasion may play out</Text>
-                    <RTETag isEarn={false} />
+                    <RTETag isEarn={false} isYellow={false} />
                     <Text className={styles.secondArticle_list_item} id={styles.secondArticle_item_content}>
                         Lorem Ipsum is simply dummy text of the printing and typesetting industry.
                         Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,

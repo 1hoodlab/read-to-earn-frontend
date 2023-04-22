@@ -45,46 +45,23 @@
   font-weight: 700;
   line-height: 7px;
   letter-spacing: 0.02em;
-  background-color: #fff500;
-  text-align: center;
-}
-
-#tagFree {
-  height: 17px;
-  width: 59px;
-  border-radius: 1px;
-  font-family: Montserrat;
-  font-size: 8px;
-  font-weight: 700;
-  line-height: 7px;
-  letter-spacing: 0.02em;
-  background-color: #00ff75;
   text-align: center;
 }
 
 //Menu
 .menu {
-  margin-top: 3.37px;
   padding: 13px 0;
   border-top: 1px solid #ededed;
   border-bottom: 1px solid #ededed;
 
   .menu_list {
     list-style: none;
-    justify-content: space-around;
-    text-align: center;
-
-
 
     .text {
       display: inline-block;
       font-family: Inter;
-      font-size: 12px;
-      font-weight: 600;
-      line-height: 15px;
       letter-spacing: 0em;
       margin: 0 13px;
-      color: #5A5A5A;
 
       &:hover {
         color: #000000;
