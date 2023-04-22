@@ -1,8 +1,20 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+
+
 
 ## Getting Started
+### Setup Backend
 
-First, run the development server:
+```bash
+# checkout backend
+git clone https://github.com/SpirityVN/read-to-earn-backend
+
+# run docker-compose.yml
+docker-compose -f "docker-compose.yml" up -d --build
+
+```
+API document: http://localhost:8080/docs
+
+### Setup Frontend
 
 ```bash
 npm run dev
