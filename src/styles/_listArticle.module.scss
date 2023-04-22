@@ -37,8 +37,8 @@
 
 
     .listArticle_list {
-        display: inline-block;
-        max-width: calc(100%/3);
+
+        max-width: calc(98%/3);
         height: 100%;
 
         // p {
@@ -53,8 +53,8 @@
 
         // // }
 
-        // #listArticle_item_img:first-child {
-        //     width: 353px;
+        // #listArticle_item:first-child {
+        //     margin-right: -10px;
         // }
 
         #author {

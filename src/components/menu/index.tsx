@@ -1,23 +1,23 @@
 import React from 'react'
 import styles from "@/styles/Home.module.scss";
-import { Box, Text } from '@chakra-ui/react'
+import { Box, UnorderedList, ListItem } from '@chakra-ui/react'
 
 export default function Menu() {
     return (
         <Box className={styles.menu}>
-            <Box className={styles.menu_list}>
-                <Text className={styles.text}>Home</Text>
-                <Text className={styles.text}>War in Ukraina</Text>
-                <Text className={styles.text}>Coronavirus</Text>
-                <Text className={styles.text}>World</Text>
-                <Text className={styles.text}>Asia</Text>
-                <Text className={styles.text}>UK</Text>
-                <Text className={styles.text}>Tech</Text>
-                <Text className={styles.text}>Stories</Text>
-                <Text className={styles.text}>Enterintment & Arts</Text>
-                <Text className={styles.text}>Health</Text>
-                <Text className={styles.text}>Business</Text>
-            </Box>
+            <UnorderedList className={styles.menu_list}>
+                <ListItem className={styles.text}>Home</ListItem>
+                <ListItem className={styles.text}>War in Ukraina</ListItem>
+                <ListItem className={styles.text}>Coronavirus</ListItem>
+                <ListItem className={styles.text}>World</ListItem>
+                <ListItem className={styles.text}>Asia</ListItem>
+                <ListItem className={styles.text}>UK</ListItem>
+                <ListItem className={styles.text}>Tech</ListItem>
+                <ListItem className={styles.text}>Stories</ListItem>
+                <ListItem className={styles.text}>Enterintment & Arts</ListItem>
+                <ListItem className={styles.text}>Health</ListItem>
+                <ListItem className={styles.text}>Business</ListItem>
+            </UnorderedList>
         </Box>
     )
 }
