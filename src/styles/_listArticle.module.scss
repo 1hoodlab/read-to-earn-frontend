@@ -37,25 +37,10 @@
 
 
     .listArticle_list {
-        display: inline-block;
-        max-width: calc(100%/3);
+
+        max-width: calc(98%/3);
         height: 100%;
 
-        // p {
-        //     padding-right: 28px;
-        // }
-
-        // .listArticle_item {}
-
-        // #listArticle_item_img {
-        //     // height: 159px;   
-        //     // width: auto;
-
-        // // }
-
-        // #listArticle_item_img:first-child {
-        //     width: 353px;
-        // }
 
         #author {
             @include author();
@@ -68,13 +53,13 @@
         }
 
         #listArticle_item_content {
-            // font-family: Montserrat;
             font-size: 12px;
             font-weight: 700;
             line-height: 16px;
             letter-spacing: 0.02em;
             text-align: left;
             margin-top: 9px;
+            margin-bottom: 4px;
         }
 
         #listArticle_item_earn {

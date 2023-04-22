@@ -1,6 +1,6 @@
-@import 'listArticle';
+@import 'listArticle.module';
 
-.main {}
+// .main {}
 
 .home_top__container {
   border-top: 1px solid #ededed;
@@ -15,20 +15,6 @@
   line-height: 41px;
   letter-spacing: 0em;
   text-align: left;
-}
-
-@mixin btnEarn {
-  height: 17px;
-  width: 59px;
-  border-radius: 1px;
-  font-family: Montserrat;
-  font-size: 8px;
-  font-weight: 700;
-  line-height: 7px;
-  letter-spacing: 0.02em;
-  text-align: left;
-  background-color: #fff500;
-  text-align: center;
 }
 
 @mixin author {
@@ -50,30 +36,32 @@
   color: #a3a3a3;
 }
 
+#tagEarn {
+  height: 17px;
+  width: 59px;
+  border-radius: 1px;
+  font-family: Montserrat;
+  font-size: 8px;
+  font-weight: 700;
+  line-height: 7px;
+  letter-spacing: 0.02em;
+  text-align: center;
+}
 
 //Menu
 .menu {
-  margin-top: 3.37px;
   padding: 13px 0;
   border-top: 1px solid #ededed;
   border-bottom: 1px solid #ededed;
 
   .menu_list {
     list-style: none;
-    justify-content: space-around;
-    text-align: center;
-
-
 
     .text {
       display: inline-block;
       font-family: Inter;
-      font-size: 12px;
-      font-weight: 600;
-      line-height: 15px;
       letter-spacing: 0em;
       margin: 0 13px;
-      color: #5A5A5A;
 
       &:hover {
         color: #000000;
@@ -83,10 +71,20 @@
   }
 }
 
+
 // first Article
+
+#white {
+  transform: rotate(45deg);
+  position: absolute;
+  margin-top: 26.5px;
+  margin-left: 470px;
+  z-index: 2;
+}
 
 .firstArticle {
   margin-top: 92px;
+
 
   #img {
     height: 275px;
@@ -94,27 +92,28 @@
     border-radius: 0px;
     max-width: 50%;
     margin-right: 20px;
+    z-index: 1;
+    background-color: #ffffff;
   }
 
-  div {
-    max-width: 50%;
 
+  #firstArticle_list_title {
+    max-width: 50%;
   }
 
   .firstArticle_list {
-    display: inline-block;
+    z-index: 3;
 
-    .firstArticle_item {}
+    // .firstArticle_item {}
 
     #firstArticle_item_title {
       @include title();
-
-
+      font-size: 32px
     }
 
     #firstArticle_item_earn {
-      @include btnEarn();
-      margin: 10px 0 5px 0;
+
+      margin: 15px 0 5px 0;
     }
 
     #firstArticle_item_main_content {
@@ -123,7 +122,7 @@
       font-weight: 700;
       line-height: 19px;
       letter-spacing: 0.02em;
-      margin-top: 12px;
+      margin-top: 15px;
     }
 
     #firstArticle_item_content {
@@ -133,7 +132,7 @@
       letter-spacing: 0.02em;
       text-align: left;
       color: #909090;
-      margin-top: 10px;
+      margin-top: 12px;
 
       strong {
         color: #000000;
@@ -196,6 +195,8 @@
   .secondArticle_list {
     display: inline-block;
 
+
+
     .secondArticle_list_item {
       margin: 5px 0;
     }
@@ -212,10 +213,7 @@
       @include title();
     }
 
-    #btnFree {
-      @include btnEarn();
-      background-color: #00ff75;
-    }
+
 
     #secondArticle_item_content {
       font-size: 13px;
