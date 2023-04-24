@@ -1,10 +1,13 @@
 import { Box, Text } from '@chakra-ui/react'
-import React from 'react'
+import React, { useState } from 'react'
 import styles from "@/styles/Home.module.scss";
 import Image from "next/image";
 import { getNowddddMMMMDYYYY } from '@/utils';
 import ButtonRte from '../Button';
+import Login from "../Login";
+
 export default function Header() {
+  const [showModal, setShowModal] = useState(false);
   return (
     <Box
       display={"flex"}
@@ -30,9 +33,10 @@ export default function Header() {
           </Text>
         </Box>
       </Box>
-      <Box>
+      <Box onClick={() => setShowModal(true)}>
         <ButtonRte title="Login" />
       </Box>
+      <Login isVisible={showModal} onClose={() => setShowModal(false)} />
     </Box>
   )
 }
