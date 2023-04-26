@@ -1,23 +1,26 @@
-import React from 'react'
+import React from "react";
 import styles from "@/styles/Home.module.scss";
-import { Box, Text } from '@chakra-ui/react'
+import { Box, Text } from "@chakra-ui/react";
+import { useRouter } from "next/router";
+import { RouterHiddenMenu } from "@/constant";
 
 export default function Menu() {
-    return (
-        <Box className={styles.menu}>
-            <Box className={styles.menu_list}>
-                <Text className={styles.text}>Home</Text>
-                <Text className={styles.text}>War in Ukraina</Text>
-                <Text className={styles.text}>Coronavirus</Text>
-                <Text className={styles.text}>World</Text>
-                <Text className={styles.text}>Asia</Text>
-                <Text className={styles.text}>UK</Text>
-                <Text className={styles.text}>Tech</Text>
-                <Text className={styles.text}>Stories</Text>
-                <Text className={styles.text}>Enterintment & Arts</Text>
-                <Text className={styles.text}>Health</Text>
-                <Text className={styles.text}>Business</Text>
-            </Box>
-        </Box>
-    )
+  const { pathname } = useRouter();
+  return !RouterHiddenMenu.includes(pathname) ? (
+    <Box className={styles.menu}>
+      <Box className={styles.menu_list}>
+        <Text className={styles.text}>Home</Text>
+        <Text className={styles.text}>War in Ukraina</Text>
+        <Text className={styles.text}>Coronavirus</Text>
+        <Text className={styles.text}>World</Text>
+        <Text className={styles.text}>Asia</Text>
+        <Text className={styles.text}>UK</Text>
+        <Text className={styles.text}>Tech</Text>
+        <Text className={styles.text}>Stories</Text>
+        <Text className={styles.text}>Enterintment & Arts</Text>
+        <Text className={styles.text}>Health</Text>
+        <Text className={styles.text}>Business</Text>
+      </Box>
+    </Box>
+  ) : null;
 }

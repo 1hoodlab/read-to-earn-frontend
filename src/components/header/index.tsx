@@ -3,7 +3,7 @@ import React from 'react'
 import styles from "@/styles/Home.module.scss";
 import Image from "next/image";
 import { getNowddddMMMMDYYYY } from '@/utils';
-import ButtonRte from '../Button';
+import ButtonRte from '../button';
 export default function Header() {
   return (
     <Box
@@ -31,7 +31,7 @@ export default function Header() {
         </Box>
       </Box>
       <Box>
-        <ButtonRte title="Login" />
+        <ButtonRte title='Login'/>
       </Box>
     </Box>
   )
