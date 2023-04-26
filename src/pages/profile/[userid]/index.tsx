@@ -6,6 +6,8 @@ import { MetamaskIcon } from "@/components/icon/Metamask";
 
 type Props = {};
 
+const mock =
+  " Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged";
 export default function ProfilePage({}: Props) {
   return (
     <Box marginTop={"40px"}>
@@ -55,7 +57,7 @@ export default function ProfilePage({}: Props) {
       </Box>
       <Grid
         padding={"26px 40px 26px 40px"}
-        marginBottom={'10px'}
+        marginBottom={"10px"}
         templateColumns="repeat(3, 1fr)"
         w={"full"}
         background={"white"}
@@ -78,15 +80,19 @@ export default function ProfilePage({}: Props) {
             letterSpacing={"0.04em"}
             lineHeight={"16px"}
           >
-            Lorem Ipsum is simply dummy text of the printing and typesetting
-            industry. Lorem Ipsum has been the industry's standard dummy text
-            ever since the 1500s, when an unknown printer took a galley of type
-            and scrambled it to make a type specimen book. It has survived not
-            only five centuries, but also the leap into electronic typesetting,
-            remaining essentially unchanged
+            {mock}
           </Text>
         </GridItem>
-        <GridItem margin={'auto'}><Button colorScheme={"red"} leftIcon={<MetamaskIcon boxSize={'25px'}/>} fontSize={'14px'} size={'lg'}>Link account with Metamask</Button></GridItem>
+        <GridItem margin={"auto"}>
+          <Button
+            colorScheme={"red"}
+            leftIcon={<MetamaskIcon boxSize={"25px"} />}
+            fontSize={"14px"}
+            size={"lg"}
+          >
+            Link account with Metamask
+          </Button>
+        </GridItem>
       </Grid>
     </Box>
   );
