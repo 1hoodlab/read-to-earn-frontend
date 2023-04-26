@@ -1,2 +1,1 @@
-export const api_url = process.env.API_URL as string 
-
+export const API_URL = process.env.API_URL as string;
