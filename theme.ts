@@ -7,6 +7,7 @@ const components: Record<string, StyleConfig> = {
         backgroundColor: "black",
       },
     },
+    
   },
 };
 
@@ -18,6 +19,9 @@ const theme = extendTheme({
   },
 
   colors: {
+    red: {
+      500:"#FF6161",
+    },
     black: {
       100: "#000000",
       200: "#202226",
