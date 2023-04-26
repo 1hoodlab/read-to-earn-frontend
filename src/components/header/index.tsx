@@ -1,9 +1,9 @@
-import { Box, Text } from '@chakra-ui/react'
+import { Box, Text, } from '@chakra-ui/react'
 import React from 'react'
 import styles from "@/styles/Home.module.scss";
 import Image from "next/image";
 import { getNowddddMMMMDYYYY } from '@/utils';
-import ButtonRte from '../Button';
+import ButtonRte from '../button';
 export default function Header() {
   return (
     <Box
@@ -30,8 +30,22 @@ export default function Header() {
           </Text>
         </Box>
       </Box>
-      <Box>
-        <ButtonRte title="Login" />
+
+      <Box display={"flex"} className={styles.home_user}>
+        <Box className={styles.home_user_info}>
+          <Text fontWeight={800} fontSize={"10px"} lineHeight={"12.1px"} className={styles.home_user_item}>
+            John Snow
+          </Text>
+          <Text fontWeight={500} fontSize={"10px"} lineHeight={"12px"} color={"#A3A3A3"} className={styles.home_user_item}>
+            member
+          </Text>
+        </Box>
+        <Image
+          src={"/image/avatar.png"}
+          alt={"123"}
+          width={40}
+          height={40}
+        />
       </Box>
     </Box>
   )
