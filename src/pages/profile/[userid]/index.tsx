@@ -1,14 +1,67 @@
 import { Avatar, Box, Text, Grid, GridItem, Button } from "@chakra-ui/react";
 import ReactCountryFlag from "react-country-flag";
-
-import React from "react";
+import React, { useState } from "react";
 import { MetamaskIcon } from "@/components/icon/Metamask";
+import { useAccount, useConnect, useSignMessage } from "wagmi";
+import { generateMessageLinkAccount } from "@/utils";
+import { useRouter } from "next/router";
+import { DataStorageType } from "@/constant";
+import axios from "axios";
 
 type Props = {};
 
 const mock =
   " Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged";
 export default function ProfilePage({}: Props) {
+  const { query } = useRouter();
+  const { address } = useAccount();
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+
+  const { signMessage } = useSignMessage({
+    async onSuccess(signature) {
+      const accessToken = localStorage.getItem("access_token");
+      if (accessToken) {
+        _handleLinkAccount(signature, accessToken);
+      }
+    },
+    onError({ message,  name}) {
+      console.log(message, name);
+      //TODO: show toast here
+      setIsLoading(false);
+    },
+  });
+  const _handleLinkAccount = async (signature: string, accessToken: string) => {
+    try {
+      const { data } = await axios.post(
+        "/api/user/link-account",
+        {
+          wallet_address: address,
+          signature: signature,
+        },
+        {
+          headers: {
+            authorization: accessToken,
+          },
+        }
+      );
+      console.log(data);
+      setIsLoading(false);
+    } catch (error) {
+      setIsLoading(false);
+    }
+  };
+
+  const handleSignatureMessage = async (e: any) => {
+    setIsLoading(true);
+    const data = localStorage.getItem("data");
+    if (data) {
+      e.preventDefault();
+      signMessage({
+        message: generateMessageLinkAccount(query.userid as string, address),
+      });
+    }
+  };
+
   return (
     <Box marginTop={"40px"}>
       <Box>
@@ -89,6 +142,8 @@ export default function ProfilePage({}: Props) {
             leftIcon={<MetamaskIcon boxSize={"25px"} />}
             fontSize={"14px"}
             size={"lg"}
+            isLoading={isLoading}
+            onClick={handleSignatureMessage}
           >
             Link account with Metamask
           </Button>
