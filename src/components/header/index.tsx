@@ -1,9 +1,9 @@
-import { Box, Text } from '@chakra-ui/react'
-import React from 'react'
+import { Box, Text } from "@chakra-ui/react";
+import React from "react";
 import styles from "@/styles/Home.module.scss";
 import Image from "next/image";
-import { getNowddddMMMMDYYYY } from '@/utils';
-import ButtonRte from '../button';
+import { getNowddddMMMMDYYYY } from "@/utils";
+import SignIn from "../SignIn";
 export default function Header() {
   return (
     <Box
@@ -14,12 +14,7 @@ export default function Header() {
     >
       <Box display={"flex"}>
         <Box marginRight={"23px"}>
-          <Image
-            src={"/assets/logo.svg"}
-            alt={"123"}
-            width={100}
-            height={24}
-          />
+          <Image src={"/assets/logo.svg"} alt={"123"} width={100} height={24} />
         </Box>
         <Box padding={"3px"}>
           <Text fontWeight={800} fontSize={"10px"} lineHeight={"12px"}>
@@ -31,8 +26,8 @@ export default function Header() {
         </Box>
       </Box>
       <Box>
-        <ButtonRte title='Login'/>
+        <SignIn />
       </Box>
     </Box>
-  )
+  );
 }
