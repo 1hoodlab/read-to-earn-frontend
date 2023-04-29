@@ -4,7 +4,10 @@ import styles from "@/styles/Home.module.scss";
 import Image from "next/image";
 import { getNowddddMMMMDYYYY } from "@/utils";
 import SignIn from "../SignIn";
+import { useRouter } from "next/router";
 export default function Header() {
+  const { push } = useRouter();
+
   return (
     <Box
       display={"flex"}
@@ -13,7 +16,7 @@ export default function Header() {
       className={styles.home_top__container}
     >
       <Box display={"flex"}>
-        <Box marginRight={"23px"}>
+        <Box marginRight={"23px"} onClick={() => push("/")} cursor={"pointer"}>
           <Image src={"/assets/logo.svg"} alt={"123"} width={100} height={24} />
         </Box>
         <Box padding={"3px"}>

@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
 import ButtonRte from "../button";
 import { useAccount, useConnect, useDisconnect, useSignMessage } from "wagmi";
-import { Avatar, Box, Button, Text } from "@chakra-ui/react";
+import { Box } from "@chakra-ui/react";
 import withNoSSR from "../NoSSR";
-import { beautifyAddress } from "@/utils";
 import axios from "axios";
+import Account from "./account";
 type Props = {};
 
 function SignIn({}: Props) {
@@ -73,28 +73,12 @@ function SignIn({}: Props) {
       />
     </Box>
   ) : (
-    <Box display={"inline-flex"} gap={3}>
-      <Box textAlign={"right"}>
-        <Text fontWeight={800} fontSize={"10px"}>
-          {beautifyAddress(address, 4, 5)}
-        </Text>
-        <Text
-          color={"#A3A3A3"}
-          fontWeight={500}
-          fontSize={"10px"}
-          cursor={"pointer"}
-          onClick={() =>
-            isSuccess || isLogin ? handleDisconnected() : console.log("test")
-          }
-          _hover={{
-            color: "black",
-          }}
-        >
-          {isSuccess || isLogin ? "Logout" : "Verifying"}
-        </Text>
-      </Box>
-      <Avatar name={"Metamask Account"} size={"sm"} />
-    </Box>
+    <Account
+      handleDisconnected={handleDisconnected}
+      isLogin={isLogin}
+      address={address}
+      isSuccess={isSuccess}
+    />
   );
 }
 

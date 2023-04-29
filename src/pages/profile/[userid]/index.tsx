@@ -1,12 +1,12 @@
 import { Avatar, Box, Text, Grid, GridItem, Button } from "@chakra-ui/react";
 import ReactCountryFlag from "react-country-flag";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { MetamaskIcon } from "@/components/icon/Metamask";
-import { useAccount, useConnect, useSignMessage } from "wagmi";
+import { useAccount, useSignMessage } from "wagmi";
 import { generateMessageLinkAccount } from "@/utils";
 import { useRouter } from "next/router";
-import { DataStorageType } from "@/constant";
-import axios from "axios";
+import { UserInformationType } from "@/constant";
+import AxiosInstance from "@/axiosInstance";
 
 type Props = {};
 
@@ -17,33 +17,30 @@ export default function ProfilePage({}: Props) {
   const { address } = useAccount();
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
+  const [userInfo, setUserInfo] = useState<UserInformationType | undefined>(
+    undefined
+  );
+  const _handleGetUserDetail = async () => {
+    const { data } = await AxiosInstance.get("/api/user/detail");
+    setUserInfo(data);
+  };
+
   const { signMessage } = useSignMessage({
     async onSuccess(signature) {
-      const accessToken = localStorage.getItem("access_token");
-      if (accessToken) {
-        _handleLinkAccount(signature, accessToken);
-      }
+      _handleLinkAccount(signature);
     },
-    onError({ message,  name}) {
+    onError({ message, name }) {
       console.log(message, name);
       //TODO: show toast here
       setIsLoading(false);
     },
   });
-  const _handleLinkAccount = async (signature: string, accessToken: string) => {
+  const _handleLinkAccount = async (signature: string) => {
     try {
-      const { data } = await axios.post(
-        "/api/user/link-account",
-        {
-          wallet_address: address,
-          signature: signature,
-        },
-        {
-          headers: {
-            authorization: accessToken,
-          },
-        }
-      );
+      const { data } = await AxiosInstance.post("/api/user/link-account", {
+        wallet_address: address,
+        signature: signature,
+      });
       console.log(data);
       setIsLoading(false);
     } catch (error) {
@@ -61,6 +58,10 @@ export default function ProfilePage({}: Props) {
       });
     }
   };
+
+  useEffect(() => {
+    _handleGetUserDetail();
+  }, []);
 
   return (
     <Box marginTop={"40px"}>
@@ -108,47 +109,50 @@ export default function ProfilePage({}: Props) {
           </Box>
         </Box>
       </Box>
-      <Grid
-        padding={"26px 40px 26px 40px"}
-        marginBottom={"10px"}
-        templateColumns="repeat(3, 1fr)"
-        w={"full"}
-        background={"white"}
-        boxShadow={"1px 4px 7px rgba(0, 0, 0, 0.25)"}
-        borderRadius={"3px"}
-      >
-        <GridItem colSpan={2}>
-          <Text
-            fontWeight={"600"}
-            fontSize={"16px"}
-            lineHeight={"24px"}
-            marginBottom={"8px"}
-          >
-            Connect Account
-          </Text>
-          <Text
-            color={"#909090"}
-            maxW={"90%"}
-            fontSize={"12px"}
-            letterSpacing={"0.04em"}
-            lineHeight={"16px"}
-          >
-            {mock}
-          </Text>
-        </GridItem>
-        <GridItem margin={"auto"}>
-          <Button
-            colorScheme={"red"}
-            leftIcon={<MetamaskIcon boxSize={"25px"} />}
-            fontSize={"14px"}
-            size={"lg"}
-            isLoading={isLoading}
-            onClick={handleSignatureMessage}
-          >
-            Link account with Metamask
-          </Button>
-        </GridItem>
-      </Grid>
+      {userInfo && !userInfo?.wallet_address && (
+        <Grid
+          padding={"26px 40px 26px 40px"}
+          marginBottom={"10px"}
+          templateColumns="repeat(3, 1fr)"
+          w={"full"}
+          background={"white"}
+          boxShadow={"1px 4px 7px rgba(0, 0, 0, 0.25)"}
+          borderRadius={"3px"}
+        >
+          <GridItem colSpan={2}>
+            <Text
+              fontWeight={"600"}
+              fontSize={"16px"}
+              lineHeight={"24px"}
+              marginBottom={"8px"}
+            >
+              Connect Account
+            </Text>
+            <Text
+              color={"#909090"}
+              maxW={"90%"}
+              fontSize={"12px"}
+              letterSpacing={"0.04em"}
+              lineHeight={"16px"}
+            >
+              {mock}
+            </Text>
+          </GridItem>
+
+          <GridItem margin={"auto"}>
+            <Button
+              colorScheme={"red"}
+              leftIcon={<MetamaskIcon boxSize={"25px"} />}
+              fontSize={"14px"}
+              size={"lg"}
+              isLoading={isLoading}
+              onClick={handleSignatureMessage}
+            >
+              Link account with Metamask
+            </Button>
+          </GridItem>
+        </Grid>
+      )}
     </Box>
   );
 }

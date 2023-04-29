@@ -8,7 +8,7 @@ export default async function handler(
   res: NextApiResponse<any>
 ) {
   const { method, headers } = req;
-  if (method === "POST") {
+  if (method === "GET") {
     try {
       const { data } = await AxiosInstance.get("/user/detail", {
         headers: {
