@@ -1,6 +1,6 @@
 import { defineConfig } from "@wagmi/cli";
 import { erc20ABI } from "wagmi";
-import { etherscan, react } from '@wagmi/cli/plugins'
+import { actions, etherscan, react } from "@wagmi/cli/plugins";
 import SnewsABI from "./public/abi/Snews.json";
 export default defineConfig({
   out: "src/generated.ts",
@@ -14,5 +14,13 @@ export default defineConfig({
       abi: SnewsABI.abi as any,
     },
   ],
-  plugins: [react()],
+  plugins: [
+    actions({
+      getContract: true,
+      readContract: true,
+      prepareWriteContract: true,
+      watchContractEvent: true,
+    }),
+    react(),
+  ],
 });

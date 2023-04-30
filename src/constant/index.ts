@@ -1,4 +1,4 @@
-export const RouterHiddenMenu = ["/profile/[userid]"];
+export const RouterHiddenMenu = ["/profile/[userid]", "/news/managed"];
 
 export type DataStorageType = {
   id: number;
@@ -27,3 +27,5 @@ export type UserInformationType = {
   nonce_for_earn: number;
   nonce_auth_metamask: string;
 };
+
+export const PAYMENT_TOKEN_ID = 1; // USDT

@@ -1,8 +1,8 @@
-import { api_url } from "@/constant/network";
+import { API_URL } from "@/constant/network";
 import axios from "axios";
 
 const AxiosInstance = axios.create({
-  baseURL: api_url,
+  baseURL: API_URL,
 });
 
 AxiosInstance.interceptors.request.use((config) => {
