@@ -1,3 +1,4 @@
+import AxiosInstance from "@/axiosInstance";
 import { PAYMENT_TOKEN_ID } from "@/constant";
 import {
   SNEWS_CONTRACT_ADDRESS,
@@ -17,10 +18,10 @@ import React, { useEffect, useState } from "react";
 import { useAccount, useContractWrite, useWaitForTransaction } from "wagmi";
 
 type Props = {
+  title: string;
   totalSupply: string;
   slug: string;
   cid: string;
-  
 };
 type Toast = {
   success?(title?: string, description?: string): any;
@@ -28,6 +29,7 @@ type Toast = {
 };
 function PublishNews({
   totalSupply = "10",
+  title,
   slug,
   cid,
   ...props
@@ -37,14 +39,14 @@ function PublishNews({
   const [reload, setReload] = useState<boolean>(false);
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
-  const onSuccess = async (response: ethers.providers.TransactionReceipt) => {
-    console.log(response);
+  const onSuccess = async () => {
     setIsLoading(false);
     setReload(!reload);
     await _getAllowance();
     props.success?.("Done");
   };
-  const onFailed = async () => {
+  const onFailed = async (error: any) => {
+    console.log(error);
     setIsLoading(false);
     setReload(!reload);
     await _getAllowance();
@@ -86,10 +88,22 @@ function PublishNews({
 
         const transactionReceipt = await wait();
 
-        transactionReceipt && onSuccess(transactionReceipt);
+        if (!transactionReceipt) throw new Error("Bad Request!");
+
+        await AxiosInstance.post("/api/news/managed-news", {
+          title: title,
+          thumbnail: "string",
+          content_url: "string",
+          cid: cid,
+          txhash: transactionReceipt.transactionHash,
+          slug: slug,
+          payment_token: PAYMENT_TOKEN_ID,
+        });
+
+        onSuccess();
       }
     } catch (error) {
-      onFailed();
+      onFailed(error);
     }
   };
 

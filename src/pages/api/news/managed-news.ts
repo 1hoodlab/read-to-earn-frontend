@@ -3,26 +3,17 @@ import AxiosInstance from "@/axiosInstance";
 import axios, { AxiosError } from "axios";
 import type { NextApiRequest, NextApiResponse } from "next";
 
-export const config = {
-  api: {
-    bodyParser: false,
-  },
-};
-
 export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse<any>
 ) {
-  const { headers, method } = req;
-  if(method === "GET"){
-    
+  const { headers, body, method } = req;
+  if (method === "GET") {
   }
   if (method === "POST") {
     try {
-      const { data } = await AxiosInstance.post("/nft-storage/news", req, {
+      const { data } = await AxiosInstance.post("/news/managed-news", body, {
         headers: {
-          "content-type": headers["content-type"],
-          "content-length": headers["content-length"],
           Authorization: `Bearer ${headers["authorization"]}`,
         },
       });

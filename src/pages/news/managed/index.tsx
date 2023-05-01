@@ -4,6 +4,7 @@ import {
   Button,
   Input,
   InputGroup,
+  InputLeftElement,
   InputRightElement,
   Text,
 } from "@chakra-ui/react";
@@ -42,7 +43,18 @@ export default function ManagedNews({}: Props) {
         onChange={(e) => setTitle(e.target.value)}
         placeholder="Title"
       />
-
+      <InputGroup>
+        <InputLeftElement
+          pointerEvents="none"
+          color="gray.300"
+          fontSize="1.2em"
+          children="$"
+        />
+        <Input
+          placeholder="Enter amount"
+          onChange={(e) => setTotalSupply(e.target.value)}
+        />
+      </InputGroup>
       <InputGroup size="md">
         <Input
           pr="4.5rem"
@@ -68,7 +80,12 @@ export default function ManagedNews({}: Props) {
         )}
       </InputGroup>
       <Text>{cid}</Text>
-      <PublishNews slug={slug(title)} totalSupply={totalSupply} cid={cid} />
+      <PublishNews
+        title={title}
+        slug={slug(title)}
+        totalSupply={totalSupply}
+        cid={cid}
+      />
     </div>
   );
 }
