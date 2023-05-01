@@ -19,26 +19,35 @@ import { useAccount, useContractWrite, useWaitForTransaction } from "wagmi";
 type Props = {
   totalSupply: string;
   slug: string;
+  cid: string;
+  
 };
 type Toast = {
   success?(title?: string, description?: string): any;
   error?(title?: string, description?: string): any;
 };
-function PublishNews({ totalSupply = "10", slug, ...props }: Props & Toast) {
+function PublishNews({
+  totalSupply = "10",
+  slug,
+  cid,
+  ...props
+}: Props & Toast) {
   const { address } = useAccount();
   const [allowance, setAllowance] = useState<BigNumber | undefined>(undefined);
   const [reload, setReload] = useState<boolean>(false);
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
-  const onSuccess = (response: ethers.providers.TransactionReceipt) => {
+  const onSuccess = async (response: ethers.providers.TransactionReceipt) => {
     console.log(response);
     setIsLoading(false);
     setReload(!reload);
+    await _getAllowance();
     props.success?.("Done");
   };
-  const onFailed = () => {
+  const onFailed = async () => {
     setIsLoading(false);
     setReload(!reload);
+    await _getAllowance();
     props.error?.("Publish failed!");
   };
   const _getAllowance = async () => {
