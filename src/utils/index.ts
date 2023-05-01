@@ -4,6 +4,10 @@ export function getNowddddMMMMDYYYY() {
   return dayjs().format("dddd, MMMM D, YYYY");
 }
 
+export function formatDMMMMYYYY(date: string) {
+  return dayjs(date).format("D MMMM, YYYY");
+}
+
 export const beautifyAddress = (
   address: string | null | undefined,
   start: number,
@@ -14,7 +18,7 @@ export const beautifyAddress = (
   return first + "..." + second;
 };
 
-export const generateMessageLinkAccount =  (
+export const generateMessageLinkAccount = (
   userId: string,
   walletAddress: string | undefined | any
 ) => {
