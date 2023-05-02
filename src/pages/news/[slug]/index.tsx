@@ -1,10 +1,14 @@
 import AxiosInstance from "@/axiosInstance";
 import { formatDMMMMYYYY } from "@/utils";
-import { Box, Heading, Text } from "@chakra-ui/react";
+import { Box, Button, Heading, Text } from "@chakra-ui/react";
 import { NextSeo } from "next-seo";
-import React from "react";
-import { ReactMarkdown } from "react-markdown/lib/react-markdown";
+import React, { useEffect, useRef, useState } from "react";
+import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
+import ChakraUIRenderer from "chakra-ui-markdown-renderer";
+import { io } from "socket.io-client";
+
+let socket: any;
 
 interface Props {
   id: number;
@@ -23,6 +27,84 @@ interface Props {
 }
 
 export default function NewsDetail(props: Props) {
+  const socketInitializer = async () => {
+    var localStorageData;
+    await fetch("/api/socket");
+    socket = io();
+
+    socket.on("connect", () => {
+      console.log("connected");
+    });
+    const localStorageDataRaw = localStorage.getItem("data");
+    if (localStorageDataRaw) {
+      localStorageData = JSON.parse(localStorageDataRaw);
+    }
+    let isScroll = false;
+    if (
+      document.documentElement.scrollHeight >
+      document.documentElement.clientHeight
+    ) {
+      isScroll = true;
+    }
+    socket.emit(
+      "JOIN_ROOM",
+      JSON.stringify({
+        slug: props.slug,
+        user_id: localStorageData.user_id,
+        is_scroll: isScroll,
+        reader_token: localStorageData.access_token,
+      })
+    );
+
+    // socket.emit("TRACKING", JSON.stringify("123123"));
+
+    socket.on("RESULT", (data: any) => {
+      console.log(data);
+    });
+  };
+
+  const ScrollDetecting = () => {
+    window.addEventListener("scroll", () => {
+      if (typeof window !== "undefined") {
+        var winScroll =
+          document.body.scrollTop || document.documentElement.scrollTop;
+        var height =
+          document.documentElement.scrollHeight -
+          document.documentElement.clientHeight;
+
+        console.log(height, document.documentElement.clientHeight);
+        var scrolled = (winScroll / height) * 100;
+
+        socket && socket.emit("TRACKING_SCROLL", scrolled);
+      }
+    });
+  };
+  const FocusDetecting = () => {
+    window.addEventListener("focus", () => {
+      console.log(document.hasFocus());
+      if (document.hasFocus()) {
+        socket && socket.emit("TRACKING_UNFOCUSED", true);
+      }
+    });
+  };
+  const NextTabDetecting = () => {
+    window.addEventListener("visibilitychange", () => {
+      if (document.visibilityState !== "visible" || document.hasFocus()) {
+        socket && socket.emit("TRACKING_NEXT_TAB", true);
+      }
+    });
+  };
+
+  const handleClaim = () => {
+    socket && socket.emit("SUBMIT");
+  };
+  useEffect(() => {
+    socketInitializer();
+
+    ScrollDetecting();
+    NextTabDetecting();
+    FocusDetecting();
+  }, []);
   return (
     <>
       <NextSeo title={props.title} />
@@ -47,10 +129,13 @@ export default function NewsDetail(props: Props) {
         </Text>
         <Box>
           <ReactMarkdown
-            children={props?.content}
-            remarkPlugins={[[remarkGfm]]}
-          />
+            remarkPlugins={[remarkGfm]}
+            components={ChakraUIRenderer()}
+          >
+            {props.content}
+          </ReactMarkdown>
         </Box>
+        <Button onClick={handleClaim}>Submit</Button>
       </div>
     </>
   );

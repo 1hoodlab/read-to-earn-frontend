@@ -48,8 +48,9 @@ export default function ManagedNews({}: Props) {
           pointerEvents="none"
           color="gray.300"
           fontSize="1.2em"
-          children="$"
-        />
+        >
+          $
+        </InputLeftElement>
         <Input
           placeholder="Enter amount"
           onChange={(e) => setTotalSupply(e.target.value)}
@@ -76,7 +77,9 @@ export default function ManagedNews({}: Props) {
           </InputRightElement>
         )}
         {isSuccess && (
-          <InputRightElement children={<CheckIcon color="green.500" />} />
+          <InputRightElement>
+            <CheckIcon color="green.500" />
+          </InputRightElement>
         )}
       </InputGroup>
       <Text>{cid}</Text>
