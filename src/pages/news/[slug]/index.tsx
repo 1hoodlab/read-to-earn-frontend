@@ -27,6 +27,8 @@ interface Props {
 }
 
 export default function NewsDetail(props: Props) {
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+
   const socketInitializer = async () => {
     var localStorageData;
     await fetch("/api/socket");
@@ -56,13 +58,19 @@ export default function NewsDetail(props: Props) {
       })
     );
 
-    // socket.emit("TRACKING", JSON.stringify("123123"));
-
     socket.on("RESULT", (data: any) => {
+      setIsLoading(false);
+      console.log(data);
+    });
+
+    socket.on("LOG", (data: any) => {
       console.log(data);
     });
   };
 
+  const unSubcribe = () => {
+    socket && socket.emit("UNSUBCRIBE");
+  };
   const ScrollDetecting = () => {
     window.addEventListener("scroll", () => {
       if (typeof window !== "undefined") {
@@ -72,7 +80,6 @@ export default function NewsDetail(props: Props) {
           document.documentElement.scrollHeight -
           document.documentElement.clientHeight;
 
-        console.log(height, document.documentElement.clientHeight);
         var scrolled = (winScroll / height) * 100;
 
         socket && socket.emit("TRACKING_SCROLL", scrolled);
@@ -81,7 +88,6 @@ export default function NewsDetail(props: Props) {
   };
   const FocusDetecting = () => {
     window.addEventListener("focus", () => {
-      console.log(document.hasFocus());
       if (document.hasFocus()) {
         socket && socket.emit("TRACKING_UNFOCUSED", true);
       }
@@ -96,6 +102,7 @@ export default function NewsDetail(props: Props) {
   };
 
   const handleClaim = () => {
+    setIsLoading(true);
     socket && socket.emit("SUBMIT");
   };
   useEffect(() => {
@@ -104,6 +111,8 @@ export default function NewsDetail(props: Props) {
     ScrollDetecting();
     NextTabDetecting();
     FocusDetecting();
+
+    return () => unSubcribe();
   }, []);
   return (
     <>
@@ -135,7 +144,9 @@ export default function NewsDetail(props: Props) {
             {props.content}
           </ReactMarkdown>
         </Box>
-        <Button onClick={handleClaim}>Submit</Button>
+        <Button onClick={handleClaim} isLoading={isLoading}>
+          Submit
+        </Button>
       </div>
     </>
   );
