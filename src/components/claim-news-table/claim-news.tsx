@@ -23,7 +23,6 @@ function ClaimNews({ news_id, slug, transaction_id, ...props }: Props & Toast) {
   };
 
   const _claimToken = async (signature: SnewsSignature) => {
-    console.log(signature);
     const config = await prepareWriteSnews({
       address: SNEWS_CONTRACT_ADDRESS,
       functionName: "claimToken",
@@ -39,16 +38,23 @@ function ClaimNews({ news_id, slug, transaction_id, ...props }: Props & Toast) {
       ],
     });
 
-    const { hash } = await writeSnews(config);
+    const { wait } = await writeSnews(config);
 
-    return hash;
+    return wait;
   };
   const handleUserClaimNews = async (news_id: number) => {
     try {
       setIsLoading(true);
       const signature = await _getSignature(news_id);
-      const txhash = await _claimToken(signature);
-      console.log(txhash);
+      const wait = await _claimToken(signature);
+      const responseOnchain = await wait();
+      if (responseOnchain) {
+        await AxiosInstance(
+          `/api/news/verify/${responseOnchain.transactionHash}`
+        );
+        props.success?.(`Claim ${news_id} successfully`);
+        setIsLoading(false);
+      }
     } catch (error: any) {
       props.error?.(
         error?.response

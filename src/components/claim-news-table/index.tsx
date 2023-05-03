@@ -92,16 +92,22 @@ export default function ClaimNewsTable({ data = [] }: Props) {
                       : "Unknown"}
                   </Td>
                   <Td>{userClaimNews.status}</Td>
-                  <Td>{userClaimNews.token_earned}</Td>
+                  <Td>
+                    {ethers.utils.formatEther(userClaimNews.token_earned)}
+                  </Td>
                   <Td>{userClaimNews.transaction_id}</Td>
                   <Td>{userClaimNews.created_at}</Td>
                   <Td>
-                    <WrapperClaimNews
-                      news_id={userClaimNews.news.id}
-                      key={index}
-                      slug={userClaimNews.news.slug}
-                      transaction_id={userClaimNews.transaction_id}
-                    />
+                    {parseFloat(
+                      ethers.utils.formatEther(userClaimNews.token_earned)
+                    ) === 0 && (
+                      <WrapperClaimNews
+                        news_id={userClaimNews.news.id}
+                        key={index}
+                        slug={userClaimNews.news.slug}
+                        transaction_id={userClaimNews.transaction_id}
+                      />
+                    )}
                   </Td>
                 </Tr>
               );

@@ -57,7 +57,6 @@ const SocketHandler = (req: any, res: any) => {
           reader_token: reader_token,
         });
 
-        
         socket.join(roomID);
 
         try {
@@ -73,7 +72,7 @@ const SocketHandler = (req: any, res: any) => {
           );
           socket.emit("LOG", data);
         } catch (error) {
-          socket.emit("LOG", error);
+          console.log(error);
         }
         socket.emit("LOG", `ROOM_ID HAS JOIN: ${roomID}`);
       });

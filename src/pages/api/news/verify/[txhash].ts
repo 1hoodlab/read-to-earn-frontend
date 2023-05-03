@@ -7,12 +7,19 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse<any>
 ) {
-  const { query, method } = req;
+  const { query, method, headers } = req;
 
   if (method === "GET") {
-    const { slug } = query;
+    const { txhash } = query;
     try {
-      const { data } = await AxiosInstance.get(`/news/${slug}`);
+      const { data } = await AxiosInstance.get(
+        `/news/managed-claim/verify/${txhash}`,
+        {
+          headers: {
+            Authorization: `Bearer ${headers["authorization"]}`,
+          },
+        }
+      );
 
       res.status(200).json(data);
     } catch (error) {
