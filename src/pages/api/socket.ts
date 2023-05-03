@@ -57,6 +57,9 @@ const SocketHandler = (req: any, res: any) => {
           reader_token: reader_token,
         });
 
+        
+        socket.join(roomID);
+
         try {
           const { data } = await AxiosInstance.post(
             "/news/managed-claim",
@@ -73,7 +76,6 @@ const SocketHandler = (req: any, res: any) => {
           socket.emit("LOG", error);
         }
         socket.emit("LOG", `ROOM_ID HAS JOIN: ${roomID}`);
-        socket.join(roomID);
       });
 
       socket.on("TRACKING_SCROLL", (message) => {

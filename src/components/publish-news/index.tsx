@@ -1,5 +1,5 @@
 import AxiosInstance from "@/axiosInstance";
-import { PAYMENT_TOKEN_ID } from "@/constant";
+import { PAYMENT_TOKEN_ID, Toast } from "@/constant";
 import {
   SNEWS_CONTRACT_ADDRESS,
   USDT_CONTRACT_ADDRESS,
@@ -23,10 +23,7 @@ type Props = {
   slug: string;
   cid: string;
 };
-type Toast = {
-  success?(title?: string, description?: string): any;
-  error?(title?: string, description?: string): any;
-};
+
 function PublishNews({
   totalSupply = "10",
   title,

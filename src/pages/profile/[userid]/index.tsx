@@ -7,6 +7,7 @@ import { generateMessageLinkAccount } from "@/utils";
 import { useRouter } from "next/router";
 import { UserInformationType } from "@/constant";
 import AxiosInstance from "@/axiosInstance";
+import ClaimNewsTable from "@/components/claim-news-table";
 
 type Props = {};
 
@@ -20,9 +21,16 @@ export default function ProfilePage({}: Props) {
   const [userInfo, setUserInfo] = useState<UserInformationType | undefined>(
     undefined
   );
+
+  const [userClaimNewsData, setUserClaimNewsData] = useState<any>([]);
   const _handleGetUserDetail = async () => {
     const { data } = await AxiosInstance.get("/api/user/detail");
     setUserInfo(data);
+  };
+
+  const _handleGetUserClaimNews = async () => {
+    const { data } = await AxiosInstance.get("/api/news/claims");
+    setUserClaimNewsData(data);
   };
 
   const { signMessage } = useSignMessage({
@@ -61,6 +69,7 @@ export default function ProfilePage({}: Props) {
 
   useEffect(() => {
     _handleGetUserDetail();
+    _handleGetUserClaimNews();
   }, []);
 
   return (
@@ -153,6 +162,7 @@ export default function ProfilePage({}: Props) {
           </GridItem>
         </Grid>
       )}
+      <ClaimNewsTable data={userClaimNewsData} />
     </Box>
   );
 }

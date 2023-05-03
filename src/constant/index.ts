@@ -1,3 +1,5 @@
+import { BigNumber } from "ethers";
+
 export const RouterHiddenMenu = ["/profile/[userid]", "/news/managed"];
 
 export type DataStorageType = {
@@ -28,4 +30,15 @@ export type UserInformationType = {
   nonce_auth_metamask: string;
 };
 
+export type Toast = {
+  success?(title?: string, description?: string): any;
+  error?(title?: string, description?: string): any;
+};
+
+export type SnewsSignature = {
+  deadline: number;
+  v: number;
+  r: `0x${string}`;
+  s: `0x${string}`;
+};
 export const PAYMENT_TOKEN_ID = 1; // USDT
