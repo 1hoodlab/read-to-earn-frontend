@@ -1,5 +1,5 @@
 import AxiosInstance from "@/axiosInstance";
-import { Server } from "Socket.IO";
+import { Server } from "socket.io";
 import axios, { AxiosError } from "axios";
 import moment from "moment";
 
