@@ -47,7 +47,7 @@ type Props = {
 export default function ClaimNewsTable({ data = [] }: Props) {
   return (
     <TableContainer>
-      <Table variant="striped" colorScheme="teal">
+      <Table variant={`${data.length !== 0 && "striped"}`}>
         <Thead>
           <Tr>
             <Th>News ID</Th>
@@ -65,15 +65,7 @@ export default function ClaimNewsTable({ data = [] }: Props) {
         <Tbody>
           {data.length === 0 && (
             <Tr>
-              <Td>Empty</Td>
-              <Td></Td>
-              <Td></Td>
-              <Td></Td>
-              <Td></Td>
-              <Td></Td>
-              <Td></Td>
-              <Td></Td>
-              <Td></Td>
+              <Td>No data available</Td>
             </Tr>
           )}
           {data.length > 0 &&

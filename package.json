@@ -12,6 +12,9 @@
   "dependencies": {
     "@chakra-ui/icons": "^2.0.19",
     "@chakra-ui/react": "^2.5.1",
+    "@dicebear/collection": "^6.0.3",
+    "@dicebear/core": "^6.0.3",
+    "@dicebear/croodles-neutral": "^6.0.3",
     "@emotion/react": "^11.10.6",
     "@emotion/styled": "^11.10.6",
     "@next/font": "13.1.6",

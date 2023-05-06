@@ -5,6 +5,7 @@ import { Box } from "@chakra-ui/react";
 import withNoSSR from "../NoSSR";
 import axios from "axios";
 import Account from "./account";
+import { useRouter } from "next/router";
 type Props = {};
 
 function SignIn({}: Props) {
@@ -14,7 +15,7 @@ function SignIn({}: Props) {
     localStorage.getItem("access_token") ? true : false
   );
   const { disconnect } = useDisconnect();
-
+  const { push } = useRouter();
   const { signMessage, isSuccess } = useSignMessage({
     async onSuccess(data) {
       try {
@@ -57,6 +58,8 @@ function SignIn({}: Props) {
     disconnect();
     setIsLogin(false);
     localStorage.removeItem("access_token");
+    localStorage.removeItem("data");
+    push("/");
   };
   useEffect(() => {
     if (isConnected && !isLogin) {

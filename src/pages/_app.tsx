@@ -6,16 +6,12 @@ import { DefaultSeo } from "next-seo";
 import { NEXT_SEO_DEFAULT } from "next-seo.config";
 import Header from "@/components/header";
 import Menu from "@/components/menu";
-import {
-  configureChains,
-  createClient,
-  WagmiConfig,
-} from "wagmi";
+import { configureChains, createClient, WagmiConfig } from "wagmi";
 import { bscTestnet } from "wagmi/chains";
 import { publicProvider } from "wagmi/providers/public";
 import { InjectedConnector } from "wagmi/connectors/injected";
-import { MetaMaskConnector } from 'wagmi/connectors/metaMask'
-
+import { MetaMaskConnector } from "wagmi/connectors/metaMask";
+import LoadingPageProvider from "@/context/loading.context";
 
 const { chains, provider, webSocketProvider } = configureChains(
   [bscTestnet],
@@ -27,7 +23,10 @@ const client = createClient({
   logger: {
     warn: (message) => console.log(message),
   },
-  connectors: [ new MetaMaskConnector({ chains }), new InjectedConnector({ chains })],
+  connectors: [
+    new MetaMaskConnector({ chains }),
+    new InjectedConnector({ chains }),
+  ],
   provider,
   webSocketProvider,
 });
@@ -36,11 +35,13 @@ export default function App({ Component, pageProps }: AppProps) {
   return (
     <WagmiConfig client={client}>
       <ChakraProvider theme={theme}>
-        <DefaultSeo {...NEXT_SEO_DEFAULT} />
-        <Header />
-        <Menu />
+        <LoadingPageProvider>
+          <DefaultSeo {...NEXT_SEO_DEFAULT} />
+          <Header />
+          <Menu />
 
-        <Component {...pageProps} />
+          <Component {...pageProps} />
+        </LoadingPageProvider>
       </ChakraProvider>
     </WagmiConfig>
   );
