@@ -21,7 +21,7 @@ export const LoadingPageContext = createContext<LoadingPageContextType>({
 });
 
 const LoadingPageProvider: FCC = ({ children }) => {
-  const [isOpen, setIsOpen] = useState<boolean>(true);
+  const [isOpen, setIsOpen] = useState<boolean>(false);
 
   const onClose = () => {
     setIsOpen(false);

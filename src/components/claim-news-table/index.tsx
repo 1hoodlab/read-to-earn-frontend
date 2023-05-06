@@ -47,7 +47,7 @@ type Props = {
 export default function ClaimNewsTable({ data = [] }: Props) {
   return (
     <TableContainer>
-      <Table variant={`${data.length !== 0 && "striped"}`}>
+      <Table>
         <Thead>
           <Tr>
             <Th>News ID</Th>

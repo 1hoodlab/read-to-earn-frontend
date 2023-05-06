@@ -5,7 +5,7 @@ import { MetamaskIcon } from "@/components/icon/Metamask";
 import { useAccount, useSignMessage } from "wagmi";
 import { beautifyAddress, generateMessageLinkAccount } from "@/utils";
 import { useRouter } from "next/router";
-import { UserInformationType } from "@/constant";
+import { Role, UserInformationType } from "@/constant";
 import AxiosInstance from "@/axiosInstance";
 import ClaimNewsTable from "@/components/claim-news-table";
 import { useLoadingPageContext } from "@/context/loading.context";
@@ -15,6 +15,7 @@ import withNoSSR from "@/components/NoSSR";
 
 //@ts-ignore
 import { createAvatar } from "@dicebear/core";
+import CreateNews from "@/components/create-news";
 
 function ProfilePage() {
   const { query } = useRouter();
@@ -109,7 +110,10 @@ function ProfilePage() {
             userInfo={userInfo}
           />
         )}
-        <ClaimNewsTable data={userClaimNewsData} />
+        {userInfo && userInfo.role === Role.WRITER && <CreateNews />}
+        {userInfo && userInfo.role === Role.READER && (
+          <ClaimNewsTable data={userClaimNewsData} />
+        )}
       </Box>
     </>
   );

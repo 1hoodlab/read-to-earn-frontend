@@ -5,6 +5,7 @@ const components: Record<string, StyleConfig> = {
     variants: {
       black: {
         backgroundColor: "black",
+        color: "white",
       },
     },
   },

@@ -110,7 +110,13 @@ function PublishNews({
 
   return (
     <div>
-      <Button isLoading={isLoading} onClick={() => handlePublishNews()}>
+      <Button
+        colorScheme="blue"
+        borderRadius={"none"}
+        isLoading={isLoading}
+        onClick={() => handlePublishNews()}
+        w="full"
+      >
         Publish
       </Button>
     </div>

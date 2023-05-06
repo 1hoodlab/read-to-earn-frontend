@@ -42,3 +42,9 @@ export type SnewsSignature = {
   s: `0x${string}`;
 };
 export const PAYMENT_TOKEN_ID = 1; // USDT
+
+export enum Role {
+  WRITER = "writer",
+  ROOT = "root",
+  READER = "reader",
+}

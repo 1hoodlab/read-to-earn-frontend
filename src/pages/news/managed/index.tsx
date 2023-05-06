@@ -1,7 +1,10 @@
 import AxiosInstance from "@/axiosInstance";
 import PublishNews from "@/components/publish-news";
 import {
+  Box,
   Button,
+  Grid,
+  GridItem,
   Input,
   InputGroup,
   InputLeftElement,
@@ -13,9 +16,15 @@ import slug from "slug";
 import FormData from "form-data";
 import useUploadNews from "@/components/useUploadNews";
 import { CheckIcon } from "@chakra-ui/icons";
+import { IoImageOutline } from "react-icons/io5";
+import { BackIcon } from "@/components/icon/Back";
+import TextHighLight from "@/components/text-highlight";
+import { useRouter } from "next/router";
 type Props = {};
 
 export default function ManagedNews({}: Props) {
+  const { back } = useRouter();
+
   const {
     upload,
     isLoading,
@@ -37,12 +46,85 @@ export default function ManagedNews({}: Props) {
   };
 
   return (
-    <div>
-      <Input
-        value={title}
-        onChange={(e) => setTitle(e.target.value)}
-        placeholder="Title"
-      />
+    <Box paddingTop={"30px"}>
+      <Box
+        display={"inline-flex"}
+        justifyContent={"center"}
+        alignItems={"center"}
+        gap={"2"}
+        marginBottom={"38px"}
+        onClick={back}
+        cursor={"pointer"}
+      >
+        <BackIcon fontSize={"30px"} />
+        <TextHighLight
+          content="Create News"
+          hlWidth="119px"
+          fontSize={"20px"}
+          lineHeight={"24px"}
+          fontWeight={"black"}
+        />
+      </Box>
+      <Grid templateColumns="repeat(12, 1fr)" gap={6}>
+        <GridItem colSpan={8}>
+          <Box>
+            <Input
+              value={title}
+              onChange={(e) => setTitle(e.target.value)}
+              placeholder="Enter new title"
+              fontSize={"sm"}
+            />
+          </Box>
+
+          <Box>
+            <Text
+              color={"#758091"}
+              letterSpacing={"0.07em"}
+              fontWeight={"medium"}
+              fontSize={"15px"}
+            >
+              Upload Thumbnail
+            </Text>
+            <Box w={"full"} className="dashed">
+              <Box
+                display={"flex"}
+                justifyContent={"center"}
+                alignItems={"center"}
+                flexDirection={"column"}
+                padding={"50px"}
+              >
+                <IoImageOutline fontSize={"60px"} />
+                <Text
+                  marginTop={"17px"}
+                  textAlign={"center"}
+                  fontSize={"14px"}
+                  fontWeight={"medium"}
+                >
+                  Drop your file(s) here or{" "}
+                  <span style={{ color: "#1463FF" }}>browser</span>
+                </Text>
+                <Text
+                  textAlign={"center"}
+                  fontSize={"12px"}
+                  fontWeight={400}
+                  color={"#B8BDC9"}
+                >
+                  Max. file size 5MB
+                </Text>
+              </Box>
+            </Box>
+          </Box>
+        </GridItem>
+        <GridItem colSpan={4}>
+          <PublishNews
+            title={title}
+            slug={slug(title)}
+            totalSupply={totalSupply}
+            cid={cid}
+          />
+        </GridItem>
+      </Grid>
+
       <InputGroup>
         <InputLeftElement
           pointerEvents="none"
@@ -83,12 +165,6 @@ export default function ManagedNews({}: Props) {
         )}
       </InputGroup>
       <Text>{cid}</Text>
-      <PublishNews
-        title={title}
-        slug={slug(title)}
-        totalSupply={totalSupply}
-        cid={cid}
-      />
-    </div>
+    </Box>
   );
 }
