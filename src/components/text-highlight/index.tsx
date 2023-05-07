@@ -2,7 +2,7 @@ import { Text, TextProps } from "@chakra-ui/react";
 import React from "react";
 
 export default function TextHighLight(
-  props: TextProps & { hlWidth: string; content: string }
+  props: TextProps & { hlwidth: string; content: string }
 ) {
   return (
     <Text
@@ -13,7 +13,7 @@ export default function TextHighLight(
         position: "absolute",
         left: "64%",
         bottom: "-3px",
-        width: props.hlWidth,
+        width: props.hlwidth,
         height: "15px",
         transform: "translateX(-60%)",
         background: "rgba(240, 232, 33, 0.71)",

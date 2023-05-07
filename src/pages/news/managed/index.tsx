@@ -3,12 +3,15 @@ import PublishNews from "@/components/publish-news";
 import {
   Box,
   Button,
+  FormControl,
+  FormLabel,
   Grid,
   GridItem,
   Input,
   InputGroup,
   InputLeftElement,
   InputRightElement,
+  Switch,
   Text,
 } from "@chakra-ui/react";
 import React, { useState } from "react";
@@ -20,6 +23,9 @@ import { IoImageOutline } from "react-icons/io5";
 import { BackIcon } from "@/components/icon/Back";
 import TextHighLight from "@/components/text-highlight";
 import { useRouter } from "next/router";
+import Upload from "@/components/upload";
+import { UploadType } from "@/constant";
+import EnableEarn from "@/components/enable-earn";
 type Props = {};
 
 export default function ManagedNews({}: Props) {
@@ -59,7 +65,7 @@ export default function ManagedNews({}: Props) {
         <BackIcon fontSize={"30px"} />
         <TextHighLight
           content="Create News"
-          hlWidth="119px"
+          hlwidth="119px"
           fontSize={"20px"}
           lineHeight={"24px"}
           fontWeight={"black"}
@@ -67,7 +73,7 @@ export default function ManagedNews({}: Props) {
       </Box>
       <Grid templateColumns="repeat(12, 1fr)" gap={6}>
         <GridItem colSpan={8}>
-          <Box>
+          <Box marginBottom={"20px"}>
             <Input
               value={title}
               onChange={(e) => setTitle(e.target.value)}
@@ -76,68 +82,23 @@ export default function ManagedNews({}: Props) {
             />
           </Box>
 
-          <Box>
-            <Text
-              color={"#758091"}
-              letterSpacing={"0.07em"}
-              fontWeight={"medium"}
-              fontSize={"15px"}
-            >
-              Upload Thumbnail
-            </Text>
-            <Box w={"full"} className="dashed">
-              <Box
-                display={"flex"}
-                justifyContent={"center"}
-                alignItems={"center"}
-                flexDirection={"column"}
-                padding={"50px"}
-              >
-                <IoImageOutline fontSize={"60px"} />
-                <Text
-                  marginTop={"17px"}
-                  textAlign={"center"}
-                  fontSize={"14px"}
-                  fontWeight={"medium"}
-                >
-                  Drop your file(s) here or{" "}
-                  <span style={{ color: "#1463FF" }}>browser</span>
-                </Text>
-                <Text
-                  textAlign={"center"}
-                  fontSize={"12px"}
-                  fontWeight={400}
-                  color={"#B8BDC9"}
-                >
-                  Max. file size 5MB
-                </Text>
-              </Box>
-            </Box>
-          </Box>
+          <Upload type={UploadType.banner} />
+          <Upload type={UploadType.content} />
         </GridItem>
         <GridItem colSpan={4}>
-          <PublishNews
-            title={title}
-            slug={slug(title)}
-            totalSupply={totalSupply}
-            cid={cid}
-          />
+          <Box marginBottom={"20px"}>
+            <PublishNews
+              title={title}
+              slug={slug(title)}
+              totalSupply={totalSupply}
+              cid={cid}
+            />
+          </Box>
+
+          <EnableEarn />
         </GridItem>
       </Grid>
 
-      <InputGroup>
-        <InputLeftElement
-          pointerEvents="none"
-          color="gray.300"
-          fontSize="1.2em"
-        >
-          $
-        </InputLeftElement>
-        <Input
-          placeholder="Enter amount"
-          onChange={(e) => setTotalSupply(e.target.value)}
-        />
-      </InputGroup>
       <InputGroup size="md">
         <Input
           pr="4.5rem"

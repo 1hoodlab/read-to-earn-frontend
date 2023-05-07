@@ -1,4 +1,6 @@
 import { BigNumber } from "ethers";
+import { IconType } from "react-icons/lib";
+import { IoDocumentTextOutline, IoImageOutline } from "react-icons/io5";
 
 export const RouterHiddenMenu = ["/profile/[userid]", "/news/managed"];
 
@@ -48,3 +50,24 @@ export enum Role {
   ROOT = "root",
   READER = "reader",
 }
+
+export enum UploadType {
+  banner,
+  content,
+}
+
+export const UploadTypeDetail: {
+  [key in UploadType]: {
+    title: string;
+    icon: IconType;
+  };
+} = {
+  [UploadType.banner]: {
+    title: "Upload banner",
+    icon: IoImageOutline,
+  },
+  [UploadType.content]: {
+    title: "Upload content",
+    icon: IoDocumentTextOutline,
+  },
+};
