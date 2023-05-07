@@ -99,8 +99,13 @@ function LinkAccount({
         </Text>
       </GridItem>
 
-      <GridItem margin={"auto"}>
+      <GridItem
+        display={"flex"}
+        justifyContent={"center"}
+        alignItems={"center"}
+      >
         <Button
+          width={"full"}
           colorScheme={"red"}
           leftIcon={<MetamaskIcon boxSize={"25px"} />}
           fontSize={"14px"}

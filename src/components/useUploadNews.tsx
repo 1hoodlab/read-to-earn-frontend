@@ -1,8 +1,9 @@
 import AxiosInstance from "@/axiosInstance";
+import { UploadType, UploadTypeDetail } from "@/constant";
 import FormData from "form-data";
 import React, { useState } from "react";
 
-export default function useUploadNews() {
+export default function useUploadNews(type: UploadType) {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [isSuccess, setIsSuccess] = useState<boolean>(false);
   const [isError, setIsError] = useState<boolean>(false);
@@ -11,11 +12,12 @@ export default function useUploadNews() {
 
   async function upload(file: File | null | undefined) {
     const formData = new FormData();
-    formData.append("markdown_file", file);
+    formData.append(UploadTypeDetail[type].key, file);
     setIsLoading(true);
     try {
+      console.log(UploadTypeDetail[type].url);
       let { data } = await AxiosInstance.post(
-        "/api/nft-storage/news",
+        UploadTypeDetail[type].url,
         formData
       );
       setData(data);

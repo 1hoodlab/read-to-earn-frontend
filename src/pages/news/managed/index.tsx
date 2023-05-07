@@ -31,14 +31,6 @@ type Props = {};
 export default function ManagedNews({}: Props) {
   const { back } = useRouter();
 
-  const {
-    upload,
-    isLoading,
-    isSuccess,
-    isError,
-    data: cid,
-    error,
-  } = useUploadNews();
   const [title, setTitle] = useState<string>("");
   const [totalSupply, setTotalSupply] = useState<string>("0");
   const [markdownFile, setMarkdownFile] = useState<File | null | undefined>(
@@ -85,7 +77,7 @@ export default function ManagedNews({}: Props) {
           <Upload type={UploadType.banner} />
           <Upload type={UploadType.content} />
         </GridItem>
-        <GridItem colSpan={4}>
+        {/* <GridItem colSpan={4}>
           <Box marginBottom={"20px"}>
             <PublishNews
               title={title}
@@ -96,10 +88,10 @@ export default function ManagedNews({}: Props) {
           </Box>
 
           <EnableEarn />
-        </GridItem>
+        </GridItem> */}
       </Grid>
 
-      <InputGroup size="md">
+      {/* <InputGroup size="md">
         <Input
           pr="4.5rem"
           onChange={(e) => handleSetUploadFile(e)}
@@ -125,7 +117,7 @@ export default function ManagedNews({}: Props) {
           </InputRightElement>
         )}
       </InputGroup>
-      <Text>{cid}</Text>
+      <Text>{cid}</Text> */}
     </Box>
   );
 }

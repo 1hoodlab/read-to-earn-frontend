@@ -60,14 +60,20 @@ export const UploadTypeDetail: {
   [key in UploadType]: {
     title: string;
     icon: IconType;
+    key: string;
+    url: string;
   };
 } = {
   [UploadType.banner]: {
     title: "Upload banner",
     icon: IoImageOutline,
+    key: "file",
+    url: "/api/upload-banner",
   },
   [UploadType.content]: {
     title: "Upload content",
     icon: IoDocumentTextOutline,
+    key: "markdown_file",
+    url: "/api/nft-storage/news",
   },
 };

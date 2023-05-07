@@ -3,24 +3,21 @@ import { Box, Icon, Input, Spinner, Text } from "@chakra-ui/react";
 import React, { useEffect, useState } from "react";
 import { IoImageOutline } from "react-icons/io5";
 import { chakra } from "@chakra-ui/react";
+import useUploadNews from "../useUploadNews";
 
 interface Props {
   type: UploadType;
 }
 export default function Upload({ type }: Props) {
-  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const { upload, isLoading, isSuccess, isError, data, error } =
+    useUploadNews(type);
+
   const [content, setContent] = useState<string | undefined>(undefined);
 
-  const _processUploadBanner = (file: File | null | undefined) => {
-    
-  };
   const handleSetContent = (file: File | null | undefined) => {
-    console.log(file);
-    setIsLoading(true);
-    if (file) {
-      setIsLoading(false);
-    }
+    upload(file);
   };
+  console.log(data);
 
   return (
     <Box>
@@ -50,7 +47,7 @@ export default function Upload({ type }: Props) {
           <Input
             type="file"
             hidden
-            id="upload"
+            id={`upload-${type}`}
             onChange={(e) => handleSetContent(e.target.files?.item(0))}
           />
           <Text
@@ -61,7 +58,7 @@ export default function Upload({ type }: Props) {
           >
             Drop your file(s) here or{" "}
             <chakra.label
-              htmlFor="upload"
+              htmlFor={`upload-${type}`}
               style={{ color: "#1463FF" }}
               cursor={"pointer"}
             >
