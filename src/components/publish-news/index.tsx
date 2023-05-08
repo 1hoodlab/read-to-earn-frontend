@@ -23,6 +23,8 @@ type Props = {
   slug: string;
   cid: string;
   bannerUrl: string;
+  shortDescription: string;
+  shortContent: string;
 };
 
 function PublishNews({
@@ -31,6 +33,8 @@ function PublishNews({
   title,
   slug,
   cid,
+  shortDescription,
+  shortContent,
   ...props
 }: Props & Toast) {
   const { address } = useAccount();
@@ -90,6 +94,8 @@ function PublishNews({
         if (!transactionReceipt) throw new Error("Bad Request!");
 
         await AxiosInstance.post("/api/news/managed-news", {
+          short_description: shortDescription,
+          short_content: shortContent,
           title: title,
           thumbnail: bannerUrl,
           content_url: "string",

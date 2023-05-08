@@ -7,19 +7,34 @@ import TextHighLight from "@/components/text-highlight";
 import SecondArticle from "@/components/article/second-article";
 import NewsItem from "@/components/article/item";
 import { NewsTagCategory } from "@/components/news-tag";
-export default function Home() {
+import AxiosInstance from "@/axiosInstance";
+interface Props {
+  firstArticle: {
+    shortDescription: string;
+    shortContent: string;
+    newsTagCategory: NewsTagCategory;
+    title: string;
+    banner: string;
+    slug: string;
+  };
+  secondArticle: {
+    slug: string;
+    title: string;
+    shortContent: string;
+    newsTagCategory: NewsTagCategory;
+    banner: string;
+  };
+}
+export default function Home(props: Props) {
   return (
     <main className={styles.main}>
       <FirstArticle
-        shortDescription="If you use the Ordinals protocol, which allows you to inscribe NFT
-      data onto the Bitcoin"
-        shortContent="Cyber-crime and money laundering were covered in a separate
-      chapter. But it seems that all regulators' songs have this refrain
-      that they keep using. Cyber-crime and money laundering were
-      covered in a separate chapter. But it seems."
-        newsTagCategory={NewsTagCategory.earn}
-        title="Ukraine war: Five ways Russia’s invasion may play out"
-        banner="img/article1.png"
+        slug={props.firstArticle.slug}
+        shortDescription={props.firstArticle.shortDescription}
+        shortContent={props.firstArticle.shortContent}
+        newsTagCategory={props.firstArticle.newsTagCategory}
+        title={props.firstArticle.title}
+        banner={props.firstArticle.banner}
       />
       <Box
         display={"flex"}
@@ -45,11 +60,61 @@ export default function Home() {
         </Box>
       </Box>
       <Box marginBottom={"125px"}>
-        <SecondArticle />
+        <SecondArticle
+          slug={props.secondArticle.slug}
+          title={props.secondArticle.title}
+          banner={props.secondArticle.banner}
+          content={props.secondArticle.shortContent}
+          newsTagCategory={props.secondArticle.newsTagCategory}
+        />
       </Box>
-      <Box marginBottom={"66px"}>
-      
-      </Box>
+      <Box marginBottom={"66px"}></Box>
     </main>
   );
+}
+
+export async function getServerSideProps() {
+  const PAGE_DEFAULT = 1;
+  const PER_PAGE = 10;
+  let {
+    data: { data, pagination },
+  } = await AxiosInstance.get("/news/managed-news", {
+    params: {
+      page: PAGE_DEFAULT,
+      perPage: PER_PAGE,
+    },
+  });
+
+  const transformData = (
+    index: number
+  ): {
+    slug: string;
+    shortDescription: string;
+    shortContent: string;
+    newsTagCategory: NewsTagCategory;
+    title: string;
+    banner: string;
+  } => {
+    if (index > pagination.total - 1) {
+      return transformData(0);
+    }
+    return {
+      slug: data[index].slug,
+      shortDescription: data[index].short_description,
+      shortContent: data[index].short_content,
+      newsTagCategory:
+        data[index].total_supply !== 0
+          ? NewsTagCategory.earn
+          : NewsTagCategory.free,
+      title: data[index].title,
+      banner: data[index].thumbnail,
+    };
+  };
+
+  return {
+    props: {
+      firstArticle: transformData(0),
+      secondArticle: transformData(1),
+    }, // will be passed to the page component as props
+  };
 }

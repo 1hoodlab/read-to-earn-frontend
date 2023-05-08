@@ -19,9 +19,20 @@ export const LoadingPageContext = createContext<LoadingPageContextType>({
   onClose: () => {},
   onOpen: () => {},
 });
+import Router from "next/router";
+
+
+
 
 const LoadingPageProvider: FCC = ({ children }) => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
+
+  Router.events.on("routeChangeStart", (url) => {
+   onOpen()
+  });
+  
+  Router.events.on("routeChangeComplete", () => onClose());
+  Router.events.on("routeChangeError", () => onClose());
 
   const onClose = () => {
     setIsOpen(false);

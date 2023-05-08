@@ -1,12 +1,11 @@
-import { Text, TextProps } from "@chakra-ui/react";
+import { Text, TextProps, chakra } from "@chakra-ui/react";
 import React from "react";
 
 export default function TextHighLight(
   props: TextProps & { hlwidth: string; content: string }
 ) {
   return (
-    <Text
-      display={"inline"}
+    <chakra.span
       {...props}
       position={"relative"}
       _before={{
@@ -22,6 +21,6 @@ export default function TextHighLight(
       }}
     >
       {props.content}
-    </Text>
+    </chakra.span>
   );
 }

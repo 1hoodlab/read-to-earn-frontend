@@ -1,6 +1,7 @@
 import { Wrap, WrapItem } from "@chakra-ui/react";
 import React from "react";
 import NewsItem from "./item";
+import { NewsTagCategory } from "../news-tag";
 
 type Props = {
     
