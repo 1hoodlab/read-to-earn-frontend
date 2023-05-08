@@ -1,23 +1,37 @@
-import { UploadType, UploadTypeDetail } from "@/constant";
+import { Toast, UploadType, UploadTypeDetail } from "@/constant";
 import { Box, Icon, Input, Spinner, Text } from "@chakra-ui/react";
 import React, { useEffect, useState } from "react";
 import { IoImageOutline } from "react-icons/io5";
 import { chakra } from "@chakra-ui/react";
 import useUploadNews from "../useUploadNews";
+import withToast from "@/hoc/withToast";
 
 interface Props {
   type: UploadType;
+  setData:React.Dispatch<React.SetStateAction<string>>
 }
-export default function Upload({ type }: Props) {
-  const { upload, isLoading, isSuccess, isError, data, error } =
-    useUploadNews(type);
-
-  const [content, setContent] = useState<string | undefined>(undefined);
+function UploadComponent({ type, setData, success, error }: Props & Toast) {
+  const {
+    upload,
+    isLoading,
+    isSuccess,
+    data,
+    isError,
+    error: errorMessage,
+  } = useUploadNews(type);
 
   const handleSetContent = (file: File | null | undefined) => {
     upload(file);
   };
-  console.log(data);
+  useEffect(() => {
+    if (isSuccess && data) {
+      setData(data);
+      success?.(`${UploadTypeDetail[type].title} successfully`);
+    }
+    if (errorMessage || isError) {
+      error?.(`${errorMessage.message || errorMessage.errorMessage}`);
+    }
+  }, [isSuccess, data, errorMessage, isError]);
 
   return (
     <Box>
@@ -78,3 +92,5 @@ export default function Upload({ type }: Props) {
     </Box>
   );
 }
+
+export default withToast(UploadComponent);

@@ -9,15 +9,18 @@ import {
 } from "@chakra-ui/react";
 import React, { useState } from "react";
 
-type Props = {};
+type Props = {
+  data: string;
+  setData: React.Dispatch<React.SetStateAction<string>>;
+};
 
-export default function EnableEarn({}: Props) {
-  const [totalSupply, setTotalSupply] = useState<string>("");
+export default function EnableEarn({ data, setData }: Props) {
   const [isEnable, setIsEnable] = useState<boolean>(false);
 
   const handleEnable = () => {
     setIsEnable(!isEnable);
-    setTotalSupply("");
+
+    setData("");
   };
   return (
     <>
@@ -57,9 +60,9 @@ export default function EnableEarn({}: Props) {
         <Input
           fontSize={"sm"}
           isDisabled={!isEnable}
-          value={totalSupply}
+          value={data}
           placeholder="Enter amount"
-          onChange={(e) => setTotalSupply(e.target.value)}
+          onChange={(e) => setData(e.target.value)}
         />
       </InputGroup>
     </>

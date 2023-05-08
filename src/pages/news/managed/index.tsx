@@ -1,48 +1,22 @@
-import AxiosInstance from "@/axiosInstance";
 import PublishNews from "@/components/publish-news";
-import {
-  Box,
-  Button,
-  FormControl,
-  FormLabel,
-  Grid,
-  GridItem,
-  Input,
-  InputGroup,
-  InputLeftElement,
-  InputRightElement,
-  Switch,
-  Text,
-} from "@chakra-ui/react";
+import { Box, Grid, GridItem, Input } from "@chakra-ui/react";
 import React, { useState } from "react";
 import slug from "slug";
-import FormData from "form-data";
-import useUploadNews from "@/components/useUploadNews";
-import { CheckIcon } from "@chakra-ui/icons";
-import { IoImageOutline } from "react-icons/io5";
 import { BackIcon } from "@/components/icon/Back";
 import TextHighLight from "@/components/text-highlight";
 import { useRouter } from "next/router";
-import Upload from "@/components/upload";
+import UploadComponent from "@/components/upload";
 import { UploadType } from "@/constant";
 import EnableEarn from "@/components/enable-earn";
-type Props = {};
 
-export default function ManagedNews({}: Props) {
+export default function ManagedNews() {
   const { back } = useRouter();
-
+  const [cid, setCid] = useState<string>("");
+  const [bannerUrl, setBannerUrl] = useState<string>("");
   const [title, setTitle] = useState<string>("");
   const [totalSupply, setTotalSupply] = useState<string>("0");
-  const [markdownFile, setMarkdownFile] = useState<File | null | undefined>(
-    undefined
-  );
-  const handleSetUploadFile = async (
-    event: React.ChangeEvent<HTMLInputElement>
-  ) => {
-    const markdownFile = event.target.files?.item(0);
-    setMarkdownFile(markdownFile);
-  };
 
+  
   return (
     <Box paddingTop={"30px"}>
       <Box
@@ -74,12 +48,13 @@ export default function ManagedNews({}: Props) {
             />
           </Box>
 
-          <Upload type={UploadType.banner} />
-          <Upload type={UploadType.content} />
+          <UploadComponent type={UploadType.banner} setData={setBannerUrl} />
+          <UploadComponent type={UploadType.content} setData={setCid} />
         </GridItem>
-        {/* <GridItem colSpan={4}>
+        <GridItem colSpan={4}>
           <Box marginBottom={"20px"}>
             <PublishNews
+              bannerUrl={bannerUrl}
               title={title}
               slug={slug(title)}
               totalSupply={totalSupply}
@@ -87,8 +62,8 @@ export default function ManagedNews({}: Props) {
             />
           </Box>
 
-          <EnableEarn />
-        </GridItem> */}
+          <EnableEarn data={totalSupply} setData={setTotalSupply} />
+        </GridItem>
       </Grid>
 
       {/* <InputGroup size="md">

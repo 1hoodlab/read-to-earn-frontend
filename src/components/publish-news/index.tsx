@@ -22,10 +22,12 @@ type Props = {
   totalSupply: string;
   slug: string;
   cid: string;
+  bannerUrl: string;
 };
 
 function PublishNews({
-  totalSupply = "10",
+  totalSupply,
+  bannerUrl,
   title,
   slug,
   cid,
@@ -89,7 +91,7 @@ function PublishNews({
 
         await AxiosInstance.post("/api/news/managed-news", {
           title: title,
-          thumbnail: "string",
+          thumbnail: bannerUrl,
           content_url: "string",
           cid: cid,
           txhash: transactionReceipt.transactionHash,

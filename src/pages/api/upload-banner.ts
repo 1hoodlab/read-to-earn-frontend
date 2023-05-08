@@ -25,7 +25,7 @@ export default async function handler(
         },
       });
 
-      res.status(200).json(data);
+      res.status(200).json(data?.publicUrl);
     } catch (error) {
       if (axios.isAxiosError(error)) {
         const { response } = error as AxiosError;
