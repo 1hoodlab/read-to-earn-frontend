@@ -1,4 +1,4 @@
-import { Tag } from "@chakra-ui/react";
+import { Tag, TagProps } from "@chakra-ui/react";
 import React from "react";
 
 export const enum NewsTagCategory {
@@ -27,17 +27,17 @@ type Props = {
   type: NewsTagCategory;
 };
 
-export default function NewsTag({ type }: Props) {
+export default function NewsTag({ type, ...props }: Props & TagProps) {
   return (
     <Tag
-    fontSize={"8px"}
-    letterSpacing={"0.02em"}
-    fontWeight={700}
-    className="montserrat"
-    textTransform={"uppercase"}
-    paddingX={"20px"}
-    borderRadius={"1px"}
-    
+      {...props}
+      fontSize={"8px"}
+      letterSpacing={"0.02em"}
+      fontWeight={700}
+      className="montserrat"
+      textTransform={"uppercase"}
+      paddingX={"20px"}
+      borderRadius={"1px"}
       color={NewsTagType[type].color}
       background={NewsTagType[type].backgroundColor}
     >
