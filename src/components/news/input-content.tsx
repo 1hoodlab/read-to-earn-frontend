@@ -9,6 +9,8 @@ type Props = {
 
 export default function InputAnotherNewsData({
   title,
+  data,
+  setData,
   ...props
 }: Props & TextareaProps) {
   return (
@@ -24,6 +26,7 @@ export default function InputAnotherNewsData({
       </Text>
       <Box w={"full"}>
         <Textarea
+          onChange={(e) => setData(e.target.value)}
           {...props}
           fontWeight={"medium"}
           fontSize={"13px"}
