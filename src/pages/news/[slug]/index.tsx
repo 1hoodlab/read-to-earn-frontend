@@ -1,11 +1,12 @@
 import AxiosInstance from "@/axiosInstance";
 import { formatDMMMMYYYY } from "@/utils";
-import { Box, Button, Heading, Text } from "@chakra-ui/react";
+import { Box, Button, Heading, Image, Text } from "@chakra-ui/react";
 import { NextSeo } from "next-seo";
 import React, { useEffect, useRef, useState } from "react";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import ChakraUIRenderer from "chakra-ui-markdown-renderer";
+import { RiMoneyDollarCircleLine } from "react-icons/ri";
 import { io } from "socket.io-client";
 
 let socket: any;
@@ -28,7 +29,7 @@ interface Props {
 
 export default function NewsDetail(props: Props) {
   const [isLoading, setIsLoading] = useState<boolean>(false);
-
+  const [isClaim, setIsClaim] = useState<boolean>(false);
   const socketInitializer = async () => {
     var localStorageData;
     await fetch("/api/socket");
@@ -82,6 +83,8 @@ export default function NewsDetail(props: Props) {
 
         var scrolled = (winScroll / height) * 100;
 
+        scrolled >= 99 ? setIsClaim(true) : setIsClaim(false);
+
         socket && socket.emit("TRACKING_SCROLL", scrolled);
       }
     });
@@ -122,20 +125,31 @@ export default function NewsDetail(props: Props) {
           textAlign={"center"}
           fontWeight={900}
           fontSize={"35px"}
+          paddingTop={"30px"}
           letterSpacing={"0.02em"}
           lineHeight={"50px"}
         >
           {props.title}
         </Heading>
+
         <Text
           textAlign={"center"}
           color={"white.300"}
           fontSize={"sm"}
+          marginY={"10px"}
           fontWeight={600}
           lineHeight={"15px"}
         >
           {formatDMMMMYYYY(props.created_at)}
         </Text>
+        <Box marginY={"20px"}>
+          <Image
+            src={props.thumbnail}
+            w={"full"}
+            height={"300px"}
+            objectFit={"cover"}
+          />
+        </Box>
         <Box>
           <ReactMarkdown
             remarkPlugins={[remarkGfm]}
@@ -144,9 +158,25 @@ export default function NewsDetail(props: Props) {
             {props.content}
           </ReactMarkdown>
         </Box>
-        <Button onClick={handleClaim} isLoading={isLoading}>
-          Submit
-        </Button>
+        <Box
+          display={!isClaim ? "none" : "inline-block"}
+          marginBottom={"10px"}
+          position={"fixed"}
+          bottom={0}
+          right={0}
+          padding={"20px"}
+        >
+          <Button
+            onClick={handleClaim}
+            isLoading={isLoading}
+            variant={"black"}
+            width={"55px"}
+            height={"55px"}
+            borderRadius={"50%"}
+          >
+            <RiMoneyDollarCircleLine fontSize={"55px"} />
+          </Button>
+        </Box>
       </div>
     </>
   );

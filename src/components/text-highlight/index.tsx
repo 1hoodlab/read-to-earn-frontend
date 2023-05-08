@@ -6,6 +6,7 @@ export default function TextHighLight(
 ) {
   return (
     <Text
+      display={"inline"}
       {...props}
       position={"relative"}
       _before={{

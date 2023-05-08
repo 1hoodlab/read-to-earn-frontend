@@ -8,7 +8,7 @@ import withToast from "@/hoc/withToast";
 
 interface Props {
   type: UploadType;
-  setData:React.Dispatch<React.SetStateAction<string>>
+  setData: React.Dispatch<React.SetStateAction<string>>;
 }
 function UploadComponent({ type, setData, success, error }: Props & Toast) {
   const {
@@ -93,4 +93,4 @@ function UploadComponent({ type, setData, success, error }: Props & Toast) {
   );
 }
 
-export default withToast(UploadComponent);
+export default withToast(UploadComponent as any);
