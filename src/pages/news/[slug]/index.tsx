@@ -32,7 +32,7 @@ export default function NewsDetail(props: Props) {
   const [isClaim, setIsClaim] = useState<boolean>(false);
   const socketInitializer = async () => {
     var localStorageData;
-    await fetch("/api/socket");
+    await AxiosInstance("/api/socket");
     socket = io();
 
     socket.on("connect", () => {

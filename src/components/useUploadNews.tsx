@@ -15,7 +15,6 @@ export default function useUploadNews(type: UploadType) {
     formData.append(UploadTypeDetail[type].key, file);
     setIsLoading(true);
     try {
-      console.log(UploadTypeDetail[type].url);
       let { data } = await AxiosInstance.post(
         UploadTypeDetail[type].url,
         formData
