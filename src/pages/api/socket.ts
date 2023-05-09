@@ -29,9 +29,7 @@ const SocketHandler = (req: any, res: any) => {
   } else {
     console.log("Socket is initializing");
     const io = new Server(res.socket.server, {
-      cors: {
-        origin: "https://spirity.org",
-      },
+      path: "/api/socket",
     });
     res.socket.server.io = io;
 
