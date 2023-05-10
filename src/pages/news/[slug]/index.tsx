@@ -33,8 +33,10 @@ export default function NewsDetail(props: Props) {
   const socketInitializer = async () => {
     var localStorageData;
     await fetch("/api/socket");
-    socket = io({transports: ['websocket']});
-
+    socket = io({
+      transports: ["polling", "websocket"],
+      withCredentials: true,
+    });
     socket.on("connect", () => {
       console.log("connected");
     });
