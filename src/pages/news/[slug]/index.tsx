@@ -33,7 +33,7 @@ export default function NewsDetail(props: Props) {
   const socketInitializer = async () => {
     var localStorageData;
     await fetch("/api/socket");
-    socket = io();
+    socket = io({transports: ['websocket']});
 
     socket.on("connect", () => {
       console.log("connected");
