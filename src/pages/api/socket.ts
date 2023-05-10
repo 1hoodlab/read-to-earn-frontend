@@ -3,6 +3,12 @@ import { Server } from "socket.io";
 import axios, { AxiosError } from "axios";
 import moment from "moment";
 
+export const config = {
+  api: {
+    bodyParser: false
+  }
+}
+
 const reader = new Map<string, ReaderType>();
 
 type ReaderType = {
