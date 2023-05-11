@@ -12,8 +12,7 @@ import { publicProvider } from "wagmi/providers/public";
 import { InjectedConnector } from "wagmi/connectors/injected";
 import { MetaMaskConnector } from "wagmi/connectors/metaMask";
 import LoadingPageProvider from "@/context/loading.context";
-
-
+import { ConnectKitProvider } from "connectkit";
 
 const { chains, provider, webSocketProvider } = configureChains(
   [bscTestnet],
@@ -36,15 +35,17 @@ const client = createClient({
 export default function App({ Component, pageProps }: AppProps) {
   return (
     <WagmiConfig client={client}>
-      <ChakraProvider theme={theme}>
-        <LoadingPageProvider>
-          <DefaultSeo {...NEXT_SEO_DEFAULT} />
-          <Header />
-          <Menu />
+      <ConnectKitProvider>
+        <ChakraProvider theme={theme}>
+          <LoadingPageProvider>
+            <DefaultSeo {...NEXT_SEO_DEFAULT} />
+            <Header />
+            <Menu />
 
-          <Component {...pageProps} />
-        </LoadingPageProvider>
-      </ChakraProvider>
+            <Component {...pageProps} />
+          </LoadingPageProvider>
+        </ChakraProvider>
+      </ConnectKitProvider>
     </WagmiConfig>
   );
 }

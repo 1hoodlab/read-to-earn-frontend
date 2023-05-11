@@ -6,10 +6,11 @@ import withNoSSR from "../NoSSR";
 import axios from "axios";
 import Account from "./account";
 import { useRouter } from "next/router";
+import { ConnectKitButton } from "connectkit";
 type Props = {};
 
 function SignIn({}: Props) {
-  const { connect, connectors, isLoading } = useConnect();
+  const { isLoading } = useConnect();
   const { address, isConnected } = useAccount();
   const [isLogin, setIsLogin] = useState<boolean>(
     localStorage.getItem("access_token") ? true : false
@@ -67,21 +68,39 @@ function SignIn({}: Props) {
     }
   }, [isConnected]);
 
-  return !isConnected ? (
-    <Box>
-      <ButtonRte
-        title="Login"
-        isLoading={isLoading}
-        onClick={() => connect({ connector: connectors[0] })}
-      />
-    </Box>
-  ) : (
-    <Account
-      handleDisconnected={handleDisconnected}
-      isLogin={isLogin}
-      address={address}
-      isSuccess={isSuccess}
-    />
+  // return !isConnected ? (
+  //   <Box>
+  //     <ButtonRte
+  //       title="Login"
+  //       isLoading={isLoading}
+  //       onClick={() => connect({ connector: connectors[0] })}
+  //     />
+  //   </Box>
+  // ) : (
+  //   <Account
+  //     handleDisconnected={handleDisconnected}
+  //     isLogin={isLogin}
+  //     address={address}
+  //     isSuccess={isSuccess}
+  //   />
+  // );
+  return (
+    <ConnectKitButton.Custom>
+      {({ isConnected, isConnecting, show, hide, address, ensName, chain }) => {
+        return !isConnected ? (
+          <Box>
+            <ButtonRte title="Login" isLoading={isLoading} onClick={show} />
+          </Box>
+        ) : (
+          <Account
+            handleDisconnected={handleDisconnected}
+            isLogin={isLogin}
+            address={address}
+            isSuccess={isSuccess}
+          />
+        );
+      }}
+    </ConnectKitButton.Custom>
   );
 }
 
