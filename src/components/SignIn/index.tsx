@@ -68,22 +68,6 @@ function SignIn({}: Props) {
     }
   }, [isConnected]);
 
-  // return !isConnected ? (
-  //   <Box>
-  //     <ButtonRte
-  //       title="Login"
-  //       isLoading={isLoading}
-  //       onClick={() => connect({ connector: connectors[0] })}
-  //     />
-  //   </Box>
-  // ) : (
-  //   <Account
-  //     handleDisconnected={handleDisconnected}
-  //     isLogin={isLogin}
-  //     address={address}
-  //     isSuccess={isSuccess}
-  //   />
-  // );
   return (
     <ConnectKitButton.Custom>
       {({ isConnected, isConnecting, show, hide, address, ensName, chain }) => {
