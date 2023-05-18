@@ -94,7 +94,8 @@ export async function getServerSideProps() {
     newsTagCategory: NewsTagCategory;
     title: string;
     banner: string;
-  } => {
+  } | null => {
+    if (pagination.total === 0) return null;
     if (index > pagination.total - 1) {
       return transformData(0);
     }
