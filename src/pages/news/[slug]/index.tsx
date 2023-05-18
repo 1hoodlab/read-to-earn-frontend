@@ -121,7 +121,7 @@ export default function NewsDetail(props: Props) {
           document.documentElement.clientHeight;
 
         var scrolled = (winScroll / height) * 100;
-
+       
         scrolled >= 99 ? setIsClaim(true) : setIsClaim(false);
 
         socket &&
@@ -247,7 +247,7 @@ export default function NewsDetail(props: Props) {
           </ReactMarkdown>
         </Box>
         <Box
-          display={!isClaim ? "none" : "inline-block"}
+          display={!isClaim || props.total_supply === "0" ? "none" : "inline-block"}
           marginBottom={"10px"}
           position={"fixed"}
           bottom={0}
