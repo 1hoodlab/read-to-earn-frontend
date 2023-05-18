@@ -1,6 +1,5 @@
 import styles from "@/styles/Home.module.scss";
 
-import ListArticle from "@/components/listArticle";
 import FirstArticle from "@/components/article";
 import { Box, Divider, Text, Wrap, WrapItem } from "@chakra-ui/react";
 import TextHighLight from "@/components/text-highlight";
@@ -8,6 +7,7 @@ import SecondArticle from "@/components/article/second-article";
 import NewsItem from "@/components/article/item";
 import { NewsTagCategory } from "@/components/news-tag";
 import AxiosInstance from "@/axiosInstance";
+import ListArticle from "@/components/article/list";
 interface Props {
   firstArticle: {
     shortDescription: string;
@@ -24,6 +24,7 @@ interface Props {
     newsTagCategory: NewsTagCategory;
     banner: string;
   };
+  otherArticles: any;
 }
 export default function Home(props: Props) {
   return (
@@ -68,14 +69,16 @@ export default function Home(props: Props) {
           newsTagCategory={props.secondArticle.newsTagCategory}
         />
       </Box>
-      <Box marginBottom={"66px"}></Box>
+      <Box marginBottom={"66px"}>
+        <ListArticle data={props.otherArticles} />
+      </Box>
     </main>
   );
 }
 
 export async function getServerSideProps() {
   const PAGE_DEFAULT = 1;
-  const PER_PAGE = 10;
+  const PER_PAGE = 100;
   let {
     data: { data, pagination },
   } = await AxiosInstance.get("/news/managed-news", {
@@ -91,6 +94,7 @@ export async function getServerSideProps() {
     slug: string;
     shortDescription: string;
     shortContent: string;
+    author: string;
     newsTagCategory: NewsTagCategory;
     title: string;
     banner: string;
@@ -103,6 +107,7 @@ export async function getServerSideProps() {
       slug: data[index].slug,
       shortDescription: data[index].short_description,
       shortContent: data[index].short_content,
+      author: "Gamma Team.",
       newsTagCategory:
         data[index].total_supply !== "0"
           ? NewsTagCategory.earn
@@ -111,11 +116,17 @@ export async function getServerSideProps() {
       banner: data[index].thumbnail,
     };
   };
+  var otherArticles = [];
+
+  for (let i = 2; i < pagination.total; ++i) {
+    otherArticles.push(transformData(i));
+  }
 
   return {
     props: {
       firstArticle: transformData(0),
       secondArticle: transformData(1),
+      otherArticles: otherArticles,
     }, // will be passed to the page component as props
   };
 }

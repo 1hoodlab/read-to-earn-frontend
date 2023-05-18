@@ -3,40 +3,34 @@ import React from "react";
 import NewsItem from "./item";
 import { NewsTagCategory } from "../news-tag";
 
-type Props = {
-    
+type Item = {
+  author: string;
+  from: string;
+  banner: string;
+  newsTagCategory: NewsTagCategory;
+  title: string;
+  slug: string;
 };
 
-export default function ListArticle({}: Props) {
+type Props = {
+  data: Item[];
+};
+
+export default function ListArticle(props: Props) {
   return (
     <Wrap spacing={"28px"} justify={"space-between"}>
-      <WrapItem>
-        <NewsItem
-          author="Gamma Team."
-          from="Spirity.JSC"
-          banner="/img/listArticle_img1.png"
-          newsTagCategory={NewsTagCategory.earn}
-          title="Dynamic avatars for legacy capture: a revolution of blockchain use in the making"
-        />
-      </WrapItem>
-      <WrapItem>
-        <NewsItem
-          author="Gamma Team."
-          from="Spirity.JSC"
-          banner="/img/listArticle_img2.png"
-          newsTagCategory={NewsTagCategory.free}
-          title="Dynamic avatars for legacy capture: a revolution of blockchain use in the making"
-        />
-      </WrapItem>
-      <WrapItem>
-        <NewsItem
-          author="Gamma Team."
-          from="Spirity.JSC"
-          banner="/img/listArticle_img3.png"
-          newsTagCategory={NewsTagCategory.earn}
-          title="Dynamic avatars for legacy capture: a revolution of blockchain use in the making"
-        />
-      </WrapItem>
+      {props.data.map((value) => (
+        <WrapItem>
+          <NewsItem
+            slug={value.slug}
+            author={value.author}
+            from={value.from}
+            banner={value.banner}
+            newsTagCategory={value.newsTagCategory}
+            title={value.title}
+          />
+        </WrapItem>
+      ))}
     </Wrap>
   );
 }

@@ -12,11 +12,13 @@ import {
 import React from "react";
 import Author from "./author";
 import NewsTag, { NewsTagCategory } from "../news-tag";
+import { useRouter } from "next/router";
 
 type NewsItemsType = {
   banner: string;
   author: string;
   from: string;
+  slug: string;
   title: string;
   newsTagCategory: NewsTagCategory;
 };
@@ -25,16 +27,18 @@ export default function NewsItem({
   banner,
   author,
   from,
+  slug,
   title,
   newsTagCategory,
 }: NewsItemsType) {
+  const { push } = useRouter();
   return (
-    <Card maxW="353px" variant={"unstyled"} cursor={"pointer"}>
+    <Card w="353px" variant={"unstyled"} cursor={"pointer"}  onClick={() => push(`/news/${slug}`)}>
       <CardBody marginBottom={"9px"}>
         <Image
         height={"165px"}
         objectFit={"cover"}
-        
+          w={"full"}
           marginBottom={"10px"}
           src={banner}
           alt="Green double couch with wooden legs"
