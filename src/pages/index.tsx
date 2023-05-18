@@ -104,7 +104,7 @@ export async function getServerSideProps() {
       shortDescription: data[index].short_description,
       shortContent: data[index].short_content,
       newsTagCategory:
-        data[index].total_supply !== 0
+        data[index].total_supply !== "0"
           ? NewsTagCategory.earn
           : NewsTagCategory.free,
       title: data[index].title,
