@@ -20,7 +20,7 @@ export default function ListArticle(props: Props) {
   return (
     <Wrap spacing={"28px"} justify={"space-between"}>
       {props.data.map((value) => (
-        <WrapItem>
+        <WrapItem key={value.slug}>
           <NewsItem
             slug={value.slug}
             author={value.author}
