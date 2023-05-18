@@ -57,7 +57,7 @@ export default function SecondArticle({
           </Text>
         </GridItem>
         <GridItem colSpan={7}>
-          <Image src={banner} w={"full"} />
+          <Image src={banner} w={"full"} maxHeight={"265px"} objectFit={"cover"}/>
         </GridItem>
       </Grid>
     </Box>

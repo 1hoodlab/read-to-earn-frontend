@@ -1,6 +1,6 @@
 import AxiosInstance from "@/axiosInstance";
 import { formatDMMMMYYYY } from "@/utils";
-import { Box, Button, Heading, Image, Text } from "@chakra-ui/react";
+import { Box, Button, Heading, Image, Text, useToast } from "@chakra-ui/react";
 import { NextSeo } from "next-seo";
 import React, { useEffect, useState } from "react";
 import ReactMarkdown from "react-markdown";
@@ -9,6 +9,13 @@ import ChakraUIRenderer from "chakra-ui-markdown-renderer";
 import { RiMoneyDollarCircleLine } from "react-icons/ri";
 import SocketIOClient, { Socket } from "socket.io-client";
 import { DefaultEventsMap } from "socket.io/dist/typed-events";
+import { useAccount } from "wagmi";
+
+const ClaimStatus = {
+  pending: "pending",
+  success: "success",
+  failure: "failure",
+};
 
 interface Props {
   id: number;
@@ -30,8 +37,11 @@ var socket: Socket<DefaultEventsMap, DefaultEventsMap>;
 var roomId: string;
 
 export default function NewsDetail(props: Props) {
+  const { isConnected } = useAccount();
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [isClaim, setIsClaim] = useState<boolean>(false);
+
+  const toast = useToast();
 
   const socketInitializer = async () => {
     var localStorageData;
@@ -72,7 +82,13 @@ export default function NewsDetail(props: Props) {
 
     socket.on("RESULT", (data: any) => {
       setIsLoading(false);
-      console.log(data);
+      toast({
+        variant: "left-accent",
+        title: data.status,
+        position: "top-right",
+        status: data.status === ClaimStatus.failure ? "error" : "info",
+        description: data.status === ClaimStatus.failure ? "Sorry you can't claim news token" : "Congratulation 🥳. Please view the detail in the profile"
+      });
     });
 
     socket.on("LOG", (data: any) => {
@@ -163,19 +179,36 @@ export default function NewsDetail(props: Props) {
   };
 
   useEffect(() => {
-    socketInitializer();
+    if (isConnected) {
+      socketInitializer();
 
-    ScrollDetecting();
-    NextTabDetecting();
-    FocusDetecting();
+      ScrollDetecting();
+      NextTabDetecting();
+      FocusDetecting();
+    }
 
     return () => unSubcribe();
-  }, []);
+  }, [isConnected]);
 
   return (
     <>
-      <NextSeo title={props.title} />
-      <div>
+      <NextSeo
+        title={props.title}
+        description={props.content}
+        openGraph={{
+          locale: "en_IE",
+          title: props.title,
+          images: [
+            {
+              url: props.thumbnail,
+              width: 800,
+              height: 600,
+              alt: `Banner ${props.title}`,
+            },
+          ],
+        }}
+      />
+      <Box marginBottom={"30px"}>
         <Heading
           textAlign={"center"}
           fontWeight={900}
@@ -232,7 +265,7 @@ export default function NewsDetail(props: Props) {
             <RiMoneyDollarCircleLine fontSize={"55px"} />
           </Button>
         </Box>
-      </div>
+      </Box>
     </>
   );
 }
@@ -241,9 +274,11 @@ export async function getServerSideProps(ctx: any) {
   const {
     query: { slug },
   } = ctx;
+
   const { data } = await AxiosInstance.get(`/news/${slug}`);
   let response = await fetch(data.content_url);
   const jsonData = await response.text();
+
   return {
     props: {
       ...data,

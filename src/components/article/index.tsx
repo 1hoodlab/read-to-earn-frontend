@@ -57,7 +57,7 @@ function FirstArticle(props: Props) {
       <Box marginTop={"50px"}>
         <Grid templateColumns="repeat(12, 1fr)" gap={6}>
           <GridItem colSpan={5}>
-            <Image src={props.banner} className="clip-path-polygon" />
+            <Image src={props.banner} className="clip-path-polygon" height={"full"} objectFit={"cover"}/>
           </GridItem>
           <GridItem colSpan={7}>
             <Box
