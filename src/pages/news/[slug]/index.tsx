@@ -2,14 +2,13 @@ import AxiosInstance from "@/axiosInstance";
 import { formatDMMMMYYYY } from "@/utils";
 import { Box, Button, Heading, Image, Text } from "@chakra-ui/react";
 import { NextSeo } from "next-seo";
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useState } from "react";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import ChakraUIRenderer from "chakra-ui-markdown-renderer";
 import { RiMoneyDollarCircleLine } from "react-icons/ri";
-import { io } from "socket.io-client";
-
-let socket: any;
+import SocketIOClient, { Socket } from "socket.io-client";
+import { DefaultEventsMap } from "socket.io/dist/typed-events";
 
 interface Props {
   id: number;
@@ -27,23 +26,32 @@ interface Props {
   content: string;
 }
 
+var socket: Socket<DefaultEventsMap, DefaultEventsMap>;
+var roomId: string;
+
 export default function NewsDetail(props: Props) {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [isClaim, setIsClaim] = useState<boolean>(false);
+
   const socketInitializer = async () => {
     var localStorageData;
-    await fetch("/api/socket");
-    socket = io({
-      transports: ["polling", "websocket"],
-      withCredentials: true,
+
+    socket = SocketIOClient(process.env.NEXT_PUBLIC_WEBSOCKET_URL as string, {
+      transports: ["websocket", "polling"],
     });
+
+    socket.emit("PING_PONG", "PING");
+
     socket.on("connect", () => {
       console.log("connected");
     });
+
     const localStorageDataRaw = localStorage.getItem("data");
+
     if (localStorageDataRaw) {
       localStorageData = JSON.parse(localStorageDataRaw);
     }
+
     let isScroll = false;
     if (
       document.documentElement.scrollHeight >
@@ -51,6 +59,7 @@ export default function NewsDetail(props: Props) {
     ) {
       isScroll = true;
     }
+
     socket.emit(
       "JOIN_ROOM",
       JSON.stringify({
@@ -69,11 +78,23 @@ export default function NewsDetail(props: Props) {
     socket.on("LOG", (data: any) => {
       console.log(data);
     });
+
+    socket.on("ROOM", (data: any) => {
+      console.log(`You join room: ${data}`);
+      roomId = data;
+    });
   };
 
   const unSubcribe = () => {
-    socket && socket.emit("UNSUBCRIBE");
+    socket &&
+      socket.emit(
+        "UNSUBCRIBE",
+        JSON.stringify({
+          roomId: roomId,
+        })
+      );
   };
+
   const ScrollDetecting = () => {
     window.addEventListener("scroll", () => {
       if (typeof window !== "undefined") {
@@ -87,29 +108,60 @@ export default function NewsDetail(props: Props) {
 
         scrolled >= 99 ? setIsClaim(true) : setIsClaim(false);
 
-        socket && socket.emit("TRACKING_SCROLL", scrolled);
+        socket &&
+          socket.emit(
+            "TRACKING_SCROLL",
+            JSON.stringify({
+              roomId: roomId,
+              trackingScroll: scrolled,
+            })
+          );
       }
     });
   };
+
   const FocusDetecting = () => {
     window.addEventListener("focus", () => {
       if (document.hasFocus()) {
-        socket && socket.emit("TRACKING_UNFOCUSED", true);
+        socket &&
+          socket.emit(
+            "TRACKING_UNFOCUSED",
+            JSON.stringify({
+              roomId: roomId,
+              trackingUnfocused: true,
+            })
+          );
       }
     });
   };
+
   const NextTabDetecting = () => {
     window.addEventListener("visibilitychange", () => {
       if (document.visibilityState !== "visible" || document.hasFocus()) {
-        socket && socket.emit("TRACKING_NEXT_TAB", true);
+        socket &&
+          socket.emit(
+            "TRACKING_NEXT_TAB",
+            JSON.stringify({
+              roomId: roomId,
+              trackingNextTab: true,
+            })
+          );
       }
     });
   };
 
   const handleClaim = () => {
+    console.log(roomId);
     setIsLoading(true);
-    socket && socket.emit("SUBMIT");
+    socket &&
+      socket.emit(
+        "SUBMIT",
+        JSON.stringify({
+          roomId: roomId,
+        })
+      );
   };
+
   useEffect(() => {
     socketInitializer();
 
@@ -119,6 +171,7 @@ export default function NewsDetail(props: Props) {
 
     return () => unSubcribe();
   }, []);
+
   return (
     <>
       <NextSeo title={props.title} />
