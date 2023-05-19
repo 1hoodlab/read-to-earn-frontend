@@ -81,6 +81,7 @@ export default function NewsDetail(props: Props) {
     );
 
     socket.on("RESULT", (data: any) => {
+      console.log(data)
       setIsLoading(false);
       toast({
         variant: "left-accent",
