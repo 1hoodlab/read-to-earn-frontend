@@ -13,6 +13,7 @@ import { InjectedConnector } from "wagmi/connectors/injected";
 import { MetaMaskConnector } from "wagmi/connectors/metaMask";
 import LoadingPageProvider from "@/context/loading.context";
 import { ConnectKitProvider } from "connectkit";
+import Footer from "@/components/footer";
 
 const { chains, provider, webSocketProvider } = configureChains(
   [bscTestnet],
@@ -43,6 +44,7 @@ export default function App({ Component, pageProps }: AppProps) {
             <Menu />
 
             <Component {...pageProps} />
+            <Footer/>
           </LoadingPageProvider>
         </ChakraProvider>
       </ConnectKitProvider>

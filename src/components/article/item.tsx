@@ -33,7 +33,10 @@ export default function NewsItem({
 }: NewsItemsType) {
   const { push } = useRouter();
   return (
-    <Card w="353px" variant={"unstyled"} cursor={"pointer"}  onClick={() => push(`/news/${slug}`)}>
+    <Card w="353px" variant={"unstyled"} cursor={"pointer"}  onClick={() => push(`/news/${slug}`)} _hover={{
+      color: "blue.100",
+      transition: "all .1s ease-in-out",
+    }}>
       <CardBody marginBottom={"9px"}>
         <Image
         height={"165px"}

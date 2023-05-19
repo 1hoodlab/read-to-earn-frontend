@@ -9,7 +9,7 @@ type Props = {
 export default function Author({ author, from }: Props) {
   return (
     <Box>
-      <Text fontWeight={700} fontSize={"12px"} lineHeight={"15px"} marginBottom={"5px"}>
+      <Text fontWeight={700} fontSize={"0.7rem"} lineHeight={"15px"} marginBottom={"5px"}>
         By {author}
       </Text>
       <Text
